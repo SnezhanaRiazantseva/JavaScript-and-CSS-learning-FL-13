@@ -206,9 +206,8 @@
     border-radius: 0px;
   }
   .contact-form .form-control:focus {
-    background-color: rgb(102, 194, 205);
+    background-color: lightskyblue;
     color: white;
-    border-bottom: 1px solid lightskyblue;
   }
   .contact-form button:hover {
     border: 1px solid transparent;

@@ -165,9 +165,12 @@
     text-align: left;
   }
   .tm-team-description-container h2 ~ p,
-  .carousel h2 ~ p, .boxes li h2 ~ p {
+  .carousel h2 ~ p {
     font-style: italic;
     text-indent: 21px;
+  }
+  .boxes li h2 ~ p {
+    font-style: italic;
   }
   .tm-team-description-container h2 ~ p::first-line,
   .carousel h2 ~ p::first-line {

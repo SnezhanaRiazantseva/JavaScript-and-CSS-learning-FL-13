@@ -167,14 +167,11 @@
   .tm-team-description-container h2 ~ p,
   .carousel h2 ~ p, .boxes li h2 ~ p {
     font-style: italic;
+    text-indent: 21px;
   }
   .tm-team-description-container h2 ~ p::first-line,
   .carousel h2 ~ p::first-line {
     line-height: 1.8;
-  }
-  .tm-team-description-container h2 ~ p::first-letter,
-  .carousel h2 ~ p::first-letter {
-    margin-left: 21px;
   }
   .blocks .boxes li {
     padding: 10px;

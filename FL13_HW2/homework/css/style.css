@@ -135,7 +135,6 @@
     font-weight: bold;
   }
   .heading ol {
-    width: 15%;
     list-style-type: decimal-leading-zero;
   }
   .heading ol a:hover {
@@ -148,8 +147,8 @@
     content: ">";
     color: red;
   }
-  .heading ol li:nth-child(1)::after,
-  .heading ol li:nth-child(3)::after {
+  .heading ol .text::after {
+    display: inline-block;
     position: relative;
     top: -7px;
     content: "New";
@@ -157,10 +156,6 @@
     font-size: 0.5rem;
     font-variant: small-caps;
     color: red;
-  }
-  .heading ol li:nth-child(1):hover::after,
-  .heading ol li:nth-child(3):hover::after {
-    text-decoration: none;
   }
   .tm-team-description-container h2 ~ p,
   .carousel h2 ~ p {

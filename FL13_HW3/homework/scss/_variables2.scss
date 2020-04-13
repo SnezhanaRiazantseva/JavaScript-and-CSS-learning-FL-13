@@ -1,0 +1,28 @@
+$fontSource: 'Source Sans Pro', sans-serif;
+$fontFresca: 'Fresca', sans-serif;
+
+$imgSunSet: url(../img/m-h-night.jpg);
+
+$orangeButton: #E3AD3E;
+$redBackground: #ED4A34;
+$greyText: #D1D1D1;
+$defaultwhite: #fff;
+
+$themeHeaderImg: $imgSunSet;
+$themeBodyText: $fontFresca;
+$themeContentBackground: #20222E;
+$themeDivBackground: #3B3F50;
+$themeButton: $orangeButton;
+$themeWordBackground: $redBackground;
+$themeTextColor: $greyText;
+$themeHeaderColor: #fff;
+$themeGradient: linear-gradient(50deg, #E2AC3E 10%, #922C53);
+
+$themePaddingBannerHeading: 8px;
+$themeFutterWidth: 1450px;
+$themeSectionMarginLeft: 10px;
+$themeFooterCrSize: 1.5rem;
+$themeFooterCrSpacing: 0rem;
+$themeFooterMarginLeft: 10px;
+$themeWorldStartTop: -30%;
+$themeWorldStartHeight: 140%;

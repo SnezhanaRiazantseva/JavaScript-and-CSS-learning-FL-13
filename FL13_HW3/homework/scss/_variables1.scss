@@ -1,0 +1,28 @@
+$fontSource: 'Source Sans Pro', sans-serif;
+$fontHind: 'Hind', sans-serif;
+
+$imgSunRise: url(../img/m-h-day.jpg);
+
+$greenButton: #699928;
+$blueBackground: #3FA0C8;
+$greyText: #C0C3CD;
+$defaultwhite: #fff;
+
+$themeHeaderImg: $imgSunRise;
+$themeBodyText: $fontHind;
+$themeContentBackground: #fff;
+$themeDivBackground: #20222E;
+$themeButton: $greenButton;
+$themeWordBackground: $blueBackground;
+$themeTextColor: $greyText;
+$themeHeaderColor: #2C2E3B;
+$themeGradient: linear-gradient(50deg, #689827 10%, #325DDC);
+
+$themePaddingBannerHeading: 1px;
+$themeFutterWidth: 1430px;
+$themeSectionMarginLeft: 0px;
+$themeFooterCrSize: 1.3rem;
+$themeFooterCrSpacing: 0.09rem;
+$themeFooterMarginLeft: 0px;
+$themeWorldStartTop: -50%;
+$themeWorldStartHeight: 170%;

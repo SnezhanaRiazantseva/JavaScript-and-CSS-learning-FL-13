@@ -1,0 +1,231 @@
+.header_heading::before, .section_text::before, .section_banner_heading::before {
+  content: "";
+  position: absolute;
+  background-color: #3FA0C8;
+  z-index: -1; }
+
+body {
+  margin: 0;
+  padding: 0;
+  color: white;
+  background: #fff;
+  font-family: "Hind", sans-serif; }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    font-size: 62.5%; }
+  body p {
+    margin: 0; }
+  .header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 82.1vh;
+    color: #2C2E3B;
+    background: url(../img/m-h-day.jpg) 0% 50% no-repeat;
+    background-size: cover;
+    border-bottom-right-radius: 40% 40%; }
+    .header div:last-child {
+      justify-content: space-between; }
+    .header-wrap {
+      margin: 0 10%;
+      display: flex;
+      flex-direction: column; }
+      .header-wrap div {
+        position: relative;
+        display: flex;
+        max-width: 460px;
+        margin: 20px 0; }
+      .landing-logo {
+        display: flex;
+        justify-content: flex-start; }
+        .landing-logo img {
+          height: 42px;
+          width: 42px; }
+        .landing-logo p {
+          display: flex;
+          flex-direction: column;
+          margin-left: 14px;
+          font-size: 2.3rem;
+          line-height: 1.2; }
+        .landing-logo span {
+          font-size: 1rem;
+          text-align: center;
+          line-height: 1; }
+    .header_button {
+      padding: 10px 41px;
+      background-color: #699928;
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 1.7rem;
+      border: none;
+      color: #fff; }
+    .header .login {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 1.9rem;
+      color: #fff;
+      padding: 10px 4px;
+      letter-spacing: -0.01rem; }
+    .header_heading {
+      position: relative;
+      max-width: 600px;
+      margin-top: 46px;
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 6.6rem;
+      letter-spacing: 0.08rem;
+      font-weight: bold;
+      line-height: 1.04;
+      z-index: 0; }
+      .header_heading::before {
+        top: 65%;
+        left: 0%;
+        width: 48%;
+        height: 34%; }
+    .header_text {
+      max-width: 630px;
+      margin-top: 34px;
+      margin-bottom: 38px;
+      white-space: pre-line;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      letter-spacing: 0.02rem; }
+  .section {
+    position: relative;
+    margin: 0 auto;
+    width: 844px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .section_text {
+      position: relative;
+      margin-top: 36px;
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 3.8rem;
+      letter-spacing: 0.06rem;
+      font-weight: 600;
+      color: #2C2E3B;
+      z-index: 0; }
+      .section_text::before {
+        top: -15%;
+        left: 52%;
+        width: 45%;
+        height: 100%; }
+    .section_card_wrap {
+      margin-top: 17px; }
+    .section_card {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      margin-bottom: 24px;
+      padding: 18px;
+      height: 258px;
+      background-color: #20222E;
+      border-radius: 5px; }
+      .section_card_img {
+        border-radius: 6px; }
+      .section_card_img[src="img/m-1.jpg"] {
+        width: 360px; }
+      .section_card_img[src="img/m-2.jpg"] {
+        width: 336px; }
+      .section_card_img[src="img/m-3.jpg"] {
+        width: 406px; }
+      .section_card div {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 60%;
+        margin: 0 8%;
+        padding: 18px 0;
+        padding-right: 6px;
+        text-align: justify; }
+      .section_card_heading {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 2.1rem;
+        letter-spacing: 0.05rem;
+        font-weight: 600; }
+      .section_card_text {
+        margin-left: 0px;
+        margin-top: 10px;
+        font-size: 1.5rem;
+        line-height: 1.5;
+        letter-spacing: 0.02rem;
+        font-weight: 400;
+        color: #C0C3CD; }
+    .section_link {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 1.5rem;
+      color: #C0C3CD;
+      padding: 0px 0px; }
+    .section_banner {
+      position: absolute;
+      bottom: -242px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 11%;
+      width: 896px;
+      height: 136px;
+      border-radius: 5px;
+      background: linear-gradient(50deg, #689827 10%, #325DDC); }
+      .section_banner_text_wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        height: 80%; }
+      .section_banner_heading {
+        position: relative;
+        padding-top: 1px;
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 2.6rem;
+        letter-spacing: 0.12rem;
+        font-weight: bold;
+        line-height: 1.04;
+        color: #2C2E3B;
+        z-index: 0; }
+        .section_banner_heading::before {
+          top: -50%;
+          left: 29%;
+          width: 16%;
+          height: 170%; }
+      .section_banner_text {
+        padding-bottom: 14px;
+        font-size: 1.3rem;
+        line-height: 1.7;
+        letter-spacing: 0.09rem;
+        font-weight: 400;
+        color: #C0C3CD; }
+      .section_banner_button {
+        padding: 10px 41px;
+        background-color: #699928;
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 1.7rem;
+        border: none;
+        color: #fff; }
+  .footer {
+    margin-top: 174px;
+    background-color: #20222E;
+    height: 225px;
+    font-weight: 400; }
+    .footer-wrap {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      max-width: 1430px;
+      margin: 0 auto;
+      padding-top: 116px;
+      color: #C0C3CD; }
+    .footer_text {
+      width: 290px;
+      padding-bottom: 7px;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      letter-spacing: 0.03rem; }
+    .footer-cr {
+      margin-left: 0px;
+      font-size: 1.3rem;
+      line-height: 1.7;
+      letter-spacing: 0.09rem; }

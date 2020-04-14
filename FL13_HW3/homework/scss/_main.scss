@@ -23,23 +23,15 @@
 }
 
 $z-layers: (
-  underlayer: -1,
-  default: 0
+  "underlayer": -1,
+  "default": 0
 );
-@function z($key) {
-  @if map-has-key($z-layers, $key) {
-    @return map-get($z-layers, $key);
-  }
-
-  @warn "Unknown `#{$key}` in $z-layers.";
-  @return null;
-}
 
 %beforeContent {
   content: "";
   position: absolute;
   background-color: $themeWordBackground;
-  z-index: z(underlayer);
+  z-index: map-get($z-layers, underlayer);
 }
 
 body {
@@ -115,7 +107,7 @@ body {
       @include toHeaderFont($size: 6.6, $space: 0.08);
       font-weight: bold;
       line-height: 1.04;
-      z-index: z(default);
+      z-index: map-get($z-layers, default);
       &::before {
         @extend %beforeContent;
         top: 65%;
@@ -148,7 +140,7 @@ body {
       @include toHeaderFont($size: 3.8, $space: 0.06);
       font-weight: 600;
       color: $themeHeaderColor;
-      z-index: z(default);
+      z-index: map-get($z-layers, default);
       &::before {
         @extend %beforeContent;
         top: -15%;
@@ -237,7 +229,7 @@ body {
         font-weight: bold;
         line-height: 1.04;
         color: $themeHeaderColor;
-        z-index: z(default);
+        z-index: map-get($z-layers, default);
         &::before {
           @extend %beforeContent;
           top: $themeWorldStartTop;

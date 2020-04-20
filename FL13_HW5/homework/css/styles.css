@@ -1,0 +1,423 @@
+html {
+  font-size: 62.5%;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  font-family: roboto, sans-serif;
+  font-weight: 400;
+  background-color: #0b192f;
+  color: #484848;
+}
+body, p, h1, h2, h3, ul {
+  margin: 0;
+  padding: 0;
+}
+.post-1 {
+	background: #F3D250;
+}
+.post-2 {
+	background: #8D8741;
+}
+.post-3 {
+	background: #659DBD;
+}
+.post-4 {
+	background: #DAAD86;
+}
+
+#header, main, #footer {
+  min-width: 97%;
+  width: 97%;
+  margin: 0 auto;
+}
+#header, #footer {
+  background-color: #162b4d;
+}
+#header {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(2, auto);
+  align-items: center;
+  height: 42.9vmin;
+  margin-bottom: 4.9vmin;
+  color: #fff;
+  text-align: center;
+}
+#header h1 {
+  padding-bottom: 1.4vmin;
+  font-size: 7.9vmin;
+  font-weight: 300;
+}
+#header span {
+  color: rgb(127, 32, 80);
+  font-weight: 100;
+}
+#header i {
+  padding-bottom: 2.5vmin;
+  font-size: 4.2vmin;
+}
+#header nav {
+  display: none;
+}
+.article-blog, .aside-article {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(2, auto);
+}
+.article-blog img, .aside-article img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+.article-wrap {
+  display: grid;
+  grid-template-columns: 85%;
+  grid-template-rows: repeat(2, auto);
+  justify-content: center;
+}
+.article-wrap h2 {
+  font-size: 8.67vmin;
+  margin: 7.7vmin 0 3.7vmin;
+  font-weight: 300;
+}
+.article-text {
+  font-size: 2.95vmin;
+  line-height: 1.74;
+}
+.article-wrap footer {
+  text-align: center;
+}
+.article-wrap footer p {
+  font-weight: 300;
+  font-size: 7.5vmin;
+  margin-bottom: 7.2vmin;
+}
+.article-wrap footer time {
+  font-size: 5.2vmin;
+  padding-left: 0.7vmin;
+}
+.article-img {
+  max-width: 100%;
+  width: auto;
+  height: 99.7vmin;
+  background: url(../img/post5.jpg) center center no-repeat;
+  background-size: cover;
+}
+.article-last {
+  color: #fff;
+}
+.article-last .article-wrap {
+  margin-left: -2.88vmin;
+}
+.article-last header {
+  margin-top: 21%;
+}
+#aside article {
+  margin-top: 5.2vmin;
+  color: #000;
+}
+.aside-wrap {
+  display: grid;
+  grid-template-columns: 87.8%;
+  grid-template-rows: repeat(3, auto);
+  justify-content: center;
+  background-color: #fff;
+}
+.aside-wrap h3 {
+  font-size: 5.94vmin;
+  margin: 7.7vmin 0 6.5vmin;
+  font-weight: 300;
+}
+.aside-text {
+  font-size: 2.91vmin;
+  line-height: 1.74;
+}
+.aside-button {
+  margin: 6.8vmin 0 7.8vmin;
+}
+.aside-wrap a {
+  padding: 1.6vmin 1.78vmin;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 2.76vmin;
+  color: #000;
+  border: 1px solid #000;
+}
+#footer {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(2, auto);
+  align-items: center;
+  height: 42.8vmin;
+  padding: 11.3vmin 0 3.8vmin;
+  margin-top: 9.9vmin;
+  color: #fff;
+  text-align: center;
+}
+#footer address {
+  font-style: normal;
+}
+#footer p {
+  font-size: 2.9vmin;
+  line-height: 1.9;
+}
+@media (min-width: 481px) {
+  #header {
+    height: 29.7vmin;
+    margin-bottom: 3.2vmin;
+  }
+  #header i {
+    padding-bottom: 2vmin;
+    font-size: 2.8vmin;
+  }
+  #header h1 {
+    padding-bottom: 0.8vmin;
+    font-size: 5.5vmin;
+  }
+  .blog-section-wrap {
+    grid-area: article;
+  }
+  #aide {
+    grid-area: aside;
+  }
+  .blog-section {
+    display: grid;
+    grid-template-columns: 62% 35%;
+    grid-template-rows: auto;
+    grid-column-gap: 3%;
+    grid-template-areas: "article aside";
+  }
+  .article-wrap {
+    grid-template-columns: 83.6%;
+  }
+  .article-wrap h2 {
+    font-size: 5.92vmin;
+    margin: 5.5vmin 0 2.1vmin;
+  }
+  .article-text {
+    font-size: 2.04vmin;
+  }
+  .article-wrap footer p {
+    font-weight: 300;
+    font-size: 5.3vmin;
+    margin-bottom: 5.0vmin;
+  }
+  .article-wrap footer time {
+    font-size: 3.4vmin;
+    padding-left: 0.5vmin;
+  }
+  .article-img {
+    height: 69.3vmin;
+  }
+  .article-last .article-wrap {
+    margin-left: -1.88vmin;
+  }
+  #aside article {
+    margin-top: 0;
+    margin-bottom: 3.5vmin;
+  }
+  .aside-wrap {
+    grid-template-columns: 76%;
+  }
+  .aside-wrap h3 {
+    font-size: 4.18vmin;
+    margin: 5.7vmin 0 4.2vmin;
+  }
+  .aside-text {
+    font-size: 2vmin;
+  }
+  .aside-button {
+    margin: 4.8vmin 0 5.8vmin;
+  }
+  .aside-wrap a {
+    padding: 1.18vmin 1.7vmin;
+    font-size: 1.76vmin;
+  }
+  #footer {
+    height: 29.7vmin;
+    padding: 7.7vmin 0 3vmin;
+    margin-top: 3.4vmin;
+  }
+  #footer p {
+    font-size: 1.98vmin;
+  }
+}
+@media (min-width: 769px) {
+  #header, #footer {
+    min-width: 93.24%;
+    width: 93.24%;
+  }
+  main {
+    min-width: 93.0%;
+    width: 93%;
+  }
+  #header {
+    grid-template-columns: .23fr 3fr 3fr 4fr .6fr;
+    grid-template-rows: auto;
+    grid-template-areas: ". logo . nav .";
+    height: auto;
+    margin-bottom: 2.3vmin;
+  }
+  #header h1 {
+    grid-area: logo;
+    justify-self: start;
+    font-size: 3.8rem;
+    padding-bottom: 0rem;
+    padding-top: 0.2rem;
+  }
+  #header i {
+    display: none;
+  }
+  #header nav {
+    grid-area: nav;
+    display: block;
+    justify-self: flex-end;
+  }
+  #header ul {
+    display: flex;
+    align-items: center;
+  }
+  #header ul li {
+    list-style: none;
+  }
+  #header ul li a {
+    font-size: 1.9rem;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    padding: 2em 1.76em 1.9em;
+    display: inline-block;
+  }
+  #header ul li a:hover {
+    background-color: rgba(184, 184, 184, 0.3);
+    color: #b8b8b8;
+    cursor: pointer;
+    transition: all 1s ease-in;
+  }
+  .blog-section {
+    grid-template-columns: 75% 23%;
+    grid-column-gap: 2%;
+  }
+  .article-blog {
+    display: flex;
+  }
+  .article-blog:nth-child(even) {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .article-blog:nth-child(even) .article-wrap h2 {
+    text-align: right;
+    margin-bottom: 0.44em;
+  }
+  .article-blog:nth-child(even) .article-text {
+    text-align: right;
+  }
+  .article-blog img {
+    max-width: 50%;
+    height: auto;
+  }
+  .article-blog img:hover,
+  .article-blog .article-wrap:hover {
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 1s ease-out;
+  }
+  .article-wrap {
+    max-width: 50%;
+    display: grid;
+    grid-template-rows: auto;
+  }
+  .article-blog:nth-child(odd) .article-wrap {
+    grid-template-columns: .76fr 7fr .34fr 1.66fr;
+    grid-template-areas: ". content . time";
+  }
+  .article-blog:nth-child(even) .article-wrap {
+    grid-template-columns: .09fr 1.66fr .34fr 7fr .68fr;
+    grid-template-areas: ". time . content .";
+  }
+  .article-content-wrap {
+    grid-area: content;
+  }
+  .article-wrap h2 {
+    font-size: 3.38vmin;
+    margin: 3.57vmin 0 1.7vmin;
+  }
+  .article-text {
+    font-size: 1.355vmin;
+    line-height: 2.12;
+    text-align: left;
+  }
+  .article-wrap footer {
+    grid-area: time;
+  }
+  .article-wrap footer p {
+    display: flex;
+    flex-direction: column;
+    font-weight: 100;
+    font-size: 4.5vmin;
+    margin-top: 1.9vmin;
+    margin-bottom: 0;
+  }
+  .article-wrap footer time {
+    font-size: 2.4vmin;
+    padding-left: 0;
+  }
+  .article-last .article-wrap {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .article-last .article-wrap {
+    grid-template-columns: 95%;
+  }
+  .article-img {
+    height: auto;
+  }
+  .article-last .article-wrap h2 {
+    margin: 2.9vmin 0 1.6vmin;
+  }
+  .article-last .article-text {
+    font-size: 1.037vmin;
+    line-height: 2.1;
+    padding-bottom: 11.2vmin;
+  }
+  #aside article {
+    margin-bottom: 2.3rem;
+  }
+  .aside-wrap {
+    grid-template-columns: 80.4%;
+  }
+  .aside-wrap h3 {
+    font-size: 2.86rem;
+    margin: 1.28em 0 1.07em;
+  }
+  .aside-text {
+    font-size: 1.07rem;
+  }
+  .aside-button {
+    margin: 3.3em 0 3.8em;
+  }
+  .aside-wrap a {
+    padding: 0.79em 0.9em;
+    font-size: 1rem;
+  }
+  .aside-wrap a:hover {
+    border: none;
+    border-bottom: 1px solid black;
+    transition: all 2s ease-out .5s;
+  }
+  #footer {
+    margin-top: 2.2vmin;
+    height: auto;
+    padding: 1.92vmin 2.3vmin;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: auto;
+    justify-content: space-between;
+    text-align: left;
+  }
+  #footer p {
+    font-size: 1.04vmin;
+    color: rgb(106, 117, 133);
+  }
+}

@@ -70,6 +70,7 @@ body, p, h1, h2, h3, ul {
   max-width: 100%;
   width: auto;
   height: auto;
+  object-fit: cover;
 }
 .article-wrap {
   display: grid;

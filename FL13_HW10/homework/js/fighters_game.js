@@ -38,7 +38,7 @@ class Fighter {
     }
   }
   logCombatHistory() {
-    return `Name: ${this.fighterObj.name}, Wins: ${this.fighterObj.win}, Losses: ${this.fighterObj.loss}`
+    return `Name: ${this.fighterObj.name}, Wins: ${this.fighterObj.win}, Losses: ${this.fighterObj.loss}`;
   }
   heal(plusHpPoints) {
     this.fighterObj.hp + plusHpPoints < MAX_POINT ? this.fighterObj.hp += plusHpPoints : this.fighterObj.hp = MAX_POINT;

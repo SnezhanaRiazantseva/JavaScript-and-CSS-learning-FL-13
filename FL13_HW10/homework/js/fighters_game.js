@@ -3,89 +3,72 @@ const BY_DOUBLE = 2;
 
 class Fighter {
   constructor(fighterObj) {
-    this.fighterObj = fighterObj;
-    this.fighterObj.win = 0;
-    this.fighterObj.loss = 0;
-  }
-  getName() { 
-    return this.fighterObj.name;
-  }
-  getDamage() {
-    return this.fighterObj.damage;
-  }
-  getStrength() {
-    return this.fighterObj.strength;
-  }
-  getAgility() {
-    return this.fighterObj.agility;
-  }
-  getHealth() {
-    return this.fighterObj.hp;
-  }
-  attack(defender) {
-    if (Object.getPrototypeOf(defender) !== Fighter.prototype) {
-      return;
-    }
-    const successProbability = MAX_POINT - (defender.fighterObj.strength + defender.fighterObj.agility);
-    const random = getRandom(0, MAX_POINT);
+    fighterObj.win = 0;
+    fighterObj.loss = 0;
+    this.getName = () => fighterObj.name;
+    this.getDamage = () => fighterObj.damage;
+    this.getStrength = () => fighterObj.strength;
+    this.getAgility = () => fighterObj.agility;
+    this.getHealth = () => fighterObj.hp;
+    this.attack = defender => {
+      if (Object.getPrototypeOf(defender) !== Fighter.prototype) {
+        return;
+      }
 
-    if (random < successProbability) {
-      defender.dealDamage(this.fighterObj.damage);
-      const result = `${this.fighterObj.name} makes ${this.fighterObj.damage} damage to ${defender.fighterObj.name}`;
-      return result;
-    } else {
-      return `${this.fighterObj.name} attack missed`;
+      const successProbability = MAX_POINT - (defender.getStrength() + defender.getAgility());
+      const random = getRandom(0, MAX_POINT);
+
+      if (random < successProbability) {
+        defender.dealDamage(fighterObj.damage);
+        const result = `${fighterObj.name} makes ${fighterObj.damage} damage to ${defender.getName()}`;
+        return result;
+      } else {
+        return `${fighterObj.name} attack missed`;
+      }
     }
-  }
-  logCombatHistory() {
-    return `Name: ${this.fighterObj.name}, Wins: ${this.fighterObj.win}, Losses: ${this.fighterObj.loss}`;
-  }
-  heal(plusHpPoints) {
-    this.fighterObj.hp + plusHpPoints < MAX_POINT ? this.fighterObj.hp += plusHpPoints : this.fighterObj.hp = MAX_POINT;
-  }
-  dealDamage(minusHpPoints) {
-    this.fighterObj.hp - minusHpPoints > 0 ? this.fighterObj.hp -= minusHpPoints : this.fighterObj.hp = 0;
-  }
-  addWin() {
-    this.win++;
-  }
-  addLoss() {
-    this.loss++;
+    this.logCombatHistory = () => `Name: ${fighterObj.name}, Wins: ${fighterObj.win}, Losses: ${fighterObj.loss}`;
+    this.heal = (plusHpPoints) => {
+      fighterObj.hp + plusHpPoints < MAX_POINT ? fighterObj.hp += plusHpPoints : fighterObj.hp = MAX_POINT;
+    }
+    this.dealDamage = (minusHpPoints) => {
+      fighterObj.hp - minusHpPoints > 0 ? fighterObj.hp -= minusHpPoints : fighterObj.hp = 0;
+    }
+    this.addWin = () => fighterObj.win++;
+    this.addLoss = () => fighterObj.loss++;
   }
 }
 
-function battle(frontman, defender) {
-  let hits = 0;
+function battle(frontman, opposer) {
+  if (!frontman.getHealth()) {
+    console.log(`${frontman.getName()} is dead and can't fight.`);
+  } else if (!opposer.getHealth()){
+    console.log(`${opposer.getName()} is dead and can't fight.`);
+  } else {
+    let hits = 0;
 
-  function isAlive(dead) {
-    if (!dead.fighterObj.hp) {
-      console.log(`${dead.fighterObj.name} is dead and can't fight.`);
-      return false;
-    }
-    return true;
-  }
+    while (opposer.getHealth() > 0 && frontman.getHealth() > 0) {
+      if (hits % BY_DOUBLE === 0) {
+        console.log(frontman.attack(opposer));
 
-  isInBattle:
-  while (isAlive(defender) && isAlive(frontman)) {
-    if (hits % BY_DOUBLE === 0) {
-      console.log(frontman.attack(defender));
-
-      if (isAlive(defender)) {
-        hits++;
+        if (opposer.getHealth() > 0) {
+          hits++;
+        } else {
+          console.log(`${frontman.getName()} has won!`);
+          opposer.addLoss();
+          frontman.addWin();
+          break;
+        }
       } else {
-        defender.fighterObj.loss++;
-        frontman.fighterObj.win++;
-        break isInBattle;
-      }
-    } else {
-      console.log(defender.attack(frontman));
+        console.log(opposer.attack(frontman));
 
-      if (isAlive(frontman)) {
-        hits++;
-      } else {
-        frontman.fighterObj.loss++;
-        defender.fighterObj.win++;
-        break isInBattle;
+        if (frontman.getHealth() > 0) {
+          hits++;
+        } else {
+          console.log(`${opposer.getName()} has won!`);
+          frontman.addLoss();
+          opposer.addWin();
+          break;
+        }
       }
     }
   }

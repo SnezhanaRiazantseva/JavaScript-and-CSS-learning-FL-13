@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.liTree {
+  list-style: none;
+  line-height: 22px;
+  cursor: pointer;
+}
+.closed-folder:before {
+  content: 'folder';
+}
+.open-folder:before {
+  content: 'folder_open';
+}
+.file:before {
+  content: 'insert_drive_file';
+  color: lightgrey;
+}
+.empty {
+  list-style: none;
+  font-style: italic;
+  cursor: default;
+}
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  background-color: #eee;
+  color: rgb(51, 51, 51);
+  justify-content: left;
+}
+.context-menu-items {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+.context-menu-active {
+  display: block;
+}
+.context-menu li {
+  display: block;
+}
+.activate li:hover {
+  background-color: rgb(202, 202, 202);
+  cursor: pointer;
+}
+.deactivate {
+  cursor: default;
+}
+input {
+  background-color: #fff;
+  font-size: 14px;
+  color: black;
+}
+input:hover {
+   background-color: #f0f0f0;
+}
+input:disabled {
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 14px;
+  color: black;
+}

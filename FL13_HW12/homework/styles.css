@@ -1,0 +1,154 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+}
+
+.static-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: auto;
+  flex: 1;
+}
+
+.set-page {
+  background-color: rgb(238, 130, 238, 0.3);
+}
+
+.set-page h1 {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.set-page h1,
+.set-page ul,
+.add-book {
+  margin: 10px 3em;
+}
+
+.set-page a {
+  color: #000;
+  text-decoration: none;
+}
+
+.set-page ul {
+  padding: 0;
+}
+
+.set-page li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.edit-book {
+  padding: 1px 10px;
+  border: 1px solid black;
+  background-color: rgb(238, 130, 238, 0.5);
+}
+
+.add-book,
+.cancel-book,
+.save-book {
+  display: block;
+  padding: 4px 0;
+  border: 1px solid black;
+  /* background-color: rgba(0, 128, 128, 0.5); */
+  text-align: center;
+}
+
+.add-book,
+.cancel-book {
+  background-color: rgba(0, 128, 128, 0.5);
+}
+
+.save-book {
+  background-color: rgb(238, 130, 238, 0.5);
+}
+
+.cancel-book,
+.save-book {
+  margin: 5px 3em;
+}
+
+.dynamic-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: auto;
+  flex: 1.5;
+  background-color: rgba(0, 128, 128, 0.3);
+}
+
+.book-preview {
+  display: flex;
+  margin: 10px 3em;
+  justify-content: space-between;
+}
+
+.book-preview img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+.book-preview div:first-child {
+  flex: 1;
+  margin-top: 22px;
+}
+
+.book-preview div:last-child {
+  flex: 2;
+  margin-left: 3em;
+}
+
+@media (max-width: 1000px) {
+  .book-preview {
+    flex-direction: column;
+  }
+
+  .book-preview img {
+    height: 100%;
+  }
+
+  .book-preview div:first-child {
+    margin-top: 22px;
+    max-height: 50vh;
+  }
+
+  .book-preview div:last-child {
+    margin-left: 0;
+  }
+}
+
+.dynamic-page form {
+  margin: 10px 3em;
+}
+
+.dynamic-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dynamic-page form input,
+.dynamic-page form textarea {
+  display: inline-block;
+  margin: 5px;
+}
+
+.containerHeader {
+  margin: 10px 3em;
+}

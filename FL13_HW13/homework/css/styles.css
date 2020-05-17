@@ -1,0 +1,31 @@
+.hero,
+.menu {
+  max-width: 66%;
+}
+.section,
+.footer {
+  max-width: 68%;
+}
+.section__subtitle {
+  max-width: 500px;
+}
+ .button-submit {
+  background-color: rgb(241, 125, 78);
+  border-color: rgb(240, 125, 78);
+ }
+ .content {
+   height: 100%;
+ }
+@media (max-width: 768px) {
+  .hero,
+  .menu {
+    max-width: 90%;
+  }
+  .section,
+  .footer {
+    max-width: 90%;
+  }
+  .section__subtitle {
+    max-width: 90%;
+  }
+}

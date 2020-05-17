@@ -124,14 +124,25 @@ function createEditPage() {
   <input type="text" required value="${booksDataSet[choosenBook]['bookAuthor']}" placeholder="Author's name">
   <input type="text" required value="${booksDataSet[choosenBook]['bookImg']}" placeholder="Book's img url">
   <textarea rows="9" required placeholder="Book's Plot">${booksDataSet[choosenBook]['bookPlot']}</textarea>
-  </form><a class="save-book">Save</a><a class="cancel-book">Cancel</a>`;
+  <input type="submit" class="save-book" name="save" value="Save">
+  <input type="submit" class="cancel-book" name="cancel" value="Cancel"></form>`;
   dynamicPage.insertAdjacentHTML('beforeend', html);
 
-  const save = document.getElementsByClassName('save-book')[0];
-  const cancel = document.getElementsByClassName('cancel-book')[0];
   const formCollection = document.querySelector('form');
+  formCollection.addEventListener('submit', executeAction);
 
-  save.addEventListener('click', doEdit)
+  function executeAction(e) {
+    event.preventDefault();
+    if (event.submitter.defaultValue === 'Cancel') {
+      const discard = confirm('Discard changes?');
+      if (discard) {
+        history.back();
+        updateState();
+      }
+    } else {
+      doEdit(e);
+    }
+  }
 
   function doEdit() {
     booksDataSet[choosenBook]['bookName'] = formCollection[0].value;
@@ -152,15 +163,6 @@ function createEditPage() {
     }
     setTimeout(() => alert('Book successfully updated'), TIMER_300);
   }
-
-  cancel.addEventListener('click', doCancel);
-
-  function doCancel() {
-    const discard = confirm('Discard changes?');
-    if (discard) {
-      history.back();
-    }
-  }
 }
 
 function createAddPage() {
@@ -168,49 +170,55 @@ function createAddPage() {
   html = `<h1 class="containerHeader">Add new book</h1><form><input type="text" required value="" 
   placeholder="Book's name"><input type="text" required value="" placeholder="Author's name">
   <input type="text" required value="" placeholder="Book's img url">
-  <textarea rows="9" required value="" placeholder="Book's Plot"></textarea><input type="submit"></form>`;
+  <textarea rows="9" required value="" placeholder="Book's Plot"></textarea>
+  <input type="submit" class="add-book" name="add" value="Add">
+  <input type="submit" class="cancel-book" name="cancel" value="Cancel"></form>`;
   dynamicPage.insertAdjacentHTML('beforeend', html);
   const formCollection = document.querySelector('form');
-  formCollection.addEventListener('submit', doChanges);
+  formCollection.addEventListener('submit', executeAction);
 
-  function doChanges(event) {
-    const checkSaveBook = confirm('Save changes?');
-    if (checkSaveBook) {
-      const arrOfValues = {
-        'bookName': formCollection[0].value,
-        'bookAuthor': formCollection[1].value,
-        'bookImg': formCollection[INDEX_2].value,
-        'bookPlot': formCollection[INDEX_3].value,
-        'uid': ''
+  function executeAction(e) {
+    if (event.submitter.defaultValue === 'Cancel') {
+      const discard = confirm('Discard changes?');
+      if (discard) {
+        history.back();
+        updateState();
       }
-      booksDataSet.push(arrOfValues);
-      setIdentifier();
-      localStorage.setItem('allBooks', JSON.stringify(booksDataSet));
-
-      const newHref = booksDataSet[booksDataSet.length - 1]['uid'];
-      addBookItem();
-      
-      let allBooks = staticPage.getElementsByClassName('bookItem');
-      for (let editedBook of allBooks) {
-        if (editedBook.href.indexOf(`?id={${newHref}}`) !== NOT_FOUND) {
-          const state = { page: editedBook.getAttribute('href') };
-          history.pushState(state, '', state.page);
-          updateState(state);
-          break;
-        }
-      }
-      setTimeout(() => alert('Book successfully added'), TIMER_300);
     } else {
-      event.preventDefault();
+      doChanges(e);
     }
+     event.preventDefault();
+  }
+
+  function doChanges() {
+    const arrOfValues = {
+      'bookName': formCollection[0].value,
+      'bookAuthor': formCollection[1].value,
+      'bookImg': formCollection[INDEX_2].value,
+      'bookPlot': formCollection[INDEX_3].value,
+      'uid': ''
+    }
+    booksDataSet.push(arrOfValues);
+    setIdentifier();
+    localStorage.setItem('allBooks', JSON.stringify(booksDataSet));
+
+    const newHref = booksDataSet[booksDataSet.length - 1]['uid'];
+    addBookItem();
+    
+    let allBooks = staticPage.getElementsByClassName('bookItem');
+    for (let editedBook of allBooks) {
+      if (editedBook.href.indexOf(`?id={${newHref}}`) !== NOT_FOUND) {
+        const state = { page: editedBook.getAttribute('href') };
+        history.pushState(state, '', state.page);
+        updateState(state);
+        break;
+      }
+    }
+    setTimeout(() => alert('Book successfully added'), TIMER_300);
   }
 }
 
-function updateState(state) {
-  if (!state) {
-    return;
-  }
-
+function updateState() {
   const content = routingPages[location.hash.slice(1)];
   if (content !== undefined) {
     dynamicPage.innerHTML = '';
@@ -225,6 +233,7 @@ function checkLink() {
   const initialUrl = location.origin + location.pathname;
   let allLinks = document.getElementsByTagName('a');
   const arr = [];
+  
   for (let link of allLinks) {
     const personalHref = link.href;
     if (personalHref === location.href) {

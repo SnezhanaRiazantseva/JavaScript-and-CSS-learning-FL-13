@@ -65,15 +65,15 @@ body {
   display: block;
   padding: 4px 0;
   border: 1px solid black;
-  /* background-color: rgba(0, 128, 128, 0.5); */
+  font-size: .8em;
   text-align: center;
 }
 
-.add-book,
 .cancel-book {
   background-color: rgba(0, 128, 128, 0.5);
 }
 
+.add-book,
 .save-book {
   background-color: rgb(238, 130, 238, 0.5);
 }

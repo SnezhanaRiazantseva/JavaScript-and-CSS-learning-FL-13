@@ -1,37 +1,10 @@
-.hero,
-.menu {
-  max-width: 68%;
+.offer__button {
+  font-size: large;
 }
-.section,
-.footer {
-  max-width: 68%;
+.offer__text {
+  font-size: large;
 }
-.section__subtitle {
-  max-width: 500px;
-}
- .button-submit {
+ .button_submit {
   background-color: rgb(241, 125, 78);
   border-color: rgb(240, 125, 78);
  }
- .content {
-   height: 100%;
- }
-@media (max-width: 768px) {
-  .hero,
-  .menu {
-    max-width: 90%;
-  }
-  .section,
-  .footer {
-    max-width: 90%;
-  }
-  .section__subtitle {
-    max-width: 90%;
-  }
-}
-@media (min-width: 992px) {
-  .hero,
-  .menu {
-    max-width: 66%;
-  }
-}

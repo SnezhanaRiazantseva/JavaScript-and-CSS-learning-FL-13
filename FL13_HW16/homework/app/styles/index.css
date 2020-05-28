@@ -1,0 +1,86 @@
+input, 
+button, 
+.loading {
+  font-family: Verdana, sans-serif;
+  font-size: 1em;
+}
+h1 {
+  margin: 1em 0;
+  font-family: Verdana, sans-serif;
+  font-size: 46px;
+  text-align: center;
+}
+.loading {
+  margin: 60px auto 0;
+  text-align: center;
+}
+form[name="addUsers"] {
+  display: flex;
+  justify-content: center;
+}
+form[name="addUsers"] input,
+.usersListBlock input {
+  margin-left: 3em;
+  padding: 1em;
+  border: none;
+  border-bottom: 1px grey solid;
+  outline: none;
+}
+form[name="addUsers"] input:hover {
+  border-bottom: 1px rgb(116, 44, 250) solid;
+}
+form[name="addUsers"] input[type="submit"],
+.usersListBlock button {
+  padding: 1em 2em;
+  border: none;
+  background-color: rgb(116, 44, 250);
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+}
+.usersListBlock {
+  margin-top: 60px;
+}
+.usersListBlock ul {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.usersListBlock li {
+  margin-bottom: 12px;
+  list-style: none;
+}
+.usersListBlock input {
+  text-align: center;
+  width: 10em;
+}
+.usersListBlock input:hover {
+  border-bottom: 1px rgb(116, 44, 250) solid;
+}
+.usersListBlock button {
+  margin-left: 1em;
+}
+form[name="addUsers"] input[type="submit"]:hover,
+.usersListBlock button:hover {
+  background-color: rgba(89, 0, 255, 0.76);
+}
+.usersListBlock .delete-user {
+  background-color: rgb(148, 113, 214);
+}
+.usersListBlock .delete-user:hover {
+  background-color: rgba(148, 113, 214, 0.8);
+}
+.usersListBlock .uid {
+  border: transparent;
+  color: black;
+  width: 5em;
+}
+.usersListBlock .update-user:disabled,
+.usersListBlock .delete-user:disabled {
+  background-color: grey;
+  cursor: default;
+}
+.usersListBlock input:disabled:hover{
+  border-bottom: 1px grey solid;
+}

@@ -76,6 +76,7 @@ form[name="addUsers"] input[type="submit"]:hover,
   color: black;
   width: 5em;
 }
+form[name="addUsers"] input[type="submit"]:disabled,
 .usersListBlock .update-user:disabled,
 .usersListBlock .delete-user:disabled {
   background-color: grey;

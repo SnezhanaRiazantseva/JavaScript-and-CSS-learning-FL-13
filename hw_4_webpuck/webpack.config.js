@@ -16,15 +16,15 @@ module.exports = {
     minimizer: [
       new OptimizeCssAssetsWebpackPlugin(),
       new TerserPlugin(),
-      new HtmlWebpackPlugin({
-        template: './src/index.html',
-        inject: 'body',
-        minify: {
-          removeAttributeQuotes: true,
-          collapseWhitespace: true,
-          removeComments: true,
-        },
-      }),
+      // new HtmlWebpackPlugin({
+      //   template: './src/index.html',
+      //   inject: 'body',
+      //   minify: {
+      //     removeAttributeQuotes: true,
+      //     collapseWhitespace: true,
+      //     removeComments: true,
+      //   },
+      // }),
     ],
   },
   module: {
@@ -88,10 +88,10 @@ module.exports = {
   },
   plugins: [
     // Array of plugins to apply to build chunk
-    // new HtmlWebpackPlugin({
-    //   template: './src/index.html',
-    //   inject: 'body',
-    // }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: 'body',
+    }),
     new MiniCssExtractPlugin({
       filename: 'styles/styles.css',
       inject: 'head',

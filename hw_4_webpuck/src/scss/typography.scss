@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 $base-font: 'Roboto';
-$title-padding: 3em;
+$title-padding: 1.5em;
 
+body {
+  font-family: $base-font;
+}
+
+h1, 
 h3 {
   font-family: $base-font;
   padding: $title-padding;
+}
+
+h3 {
+  padding: 1em;
+  padding-left: 1.5em;
 }

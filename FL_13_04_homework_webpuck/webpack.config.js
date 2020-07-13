@@ -8,7 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   entry: './src/js/index.js',
   output: {
-    path: path.join(__dirname, './dist'), // Folder to store generated bundle
+    path: path.join(__dirname, '/dist'), // Folder to store generated bundle
     filename: 'js/app.js', // Name of generated bundle after build
     publicPath: '/dist/', // public URL of the output directory when referenced in a browser
   },

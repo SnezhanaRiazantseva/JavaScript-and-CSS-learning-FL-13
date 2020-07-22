@@ -13,14 +13,16 @@ class OptionsDropdown extends React.Component {
   render() {
     return(
       <div className='dropdown'>
-        <p>
-          <img src='../edit.svg' alt='Edit icon' />
-          Edit
-        </p>
-        <p>
-          <img src='../delete.svg' alt='Delete icon'/>
-          Delete
-        </p>
+        <div className="editButton">
+          <span className="menuDots"> &#183; &#183; &#183; &#8195;</span>
+          {/* <img src='../edit.svg' alt='Edit icon' /> */}
+          <span>Edit</span>
+        </div>
+        <div className="deleteButton">
+          <span className="menuDots" > &#183; &#183; &#183; &#8195;</span>
+          {/* <img src='../delete.svg' alt='Delete icon'/> */}
+          <span>Delete</span>
+        </div>
       </div>
     )
   }
@@ -40,11 +42,11 @@ class CoursesRow extends React.Component {
 
     return (
       <div className="courseRow">
-        <div>{courses.date}</div>
-        <div className="courseName">{courses.name}</div>
-        <div>{courses.description}</div>
-        <div>{duration}</div>
-        <div className="datacellDropdown"> 
+        <div className="course">{courses.date}</div>
+        <div className="course courseName">{courses.name}</div>
+        <div className="course">{courses.description}</div>
+        <div className="course">{duration}</div>
+        <div className="course datacellDropdown"> 
           <div className="menuDots">&#183; &#183; &#183;</div>
           <OptionsDropdown/> 
         </div>

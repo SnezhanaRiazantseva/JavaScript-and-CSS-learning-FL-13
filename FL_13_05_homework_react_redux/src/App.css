@@ -78,35 +78,74 @@
 }
 
 
-.courseRow div:nth-child(1) {
+.courseRow .course:nth-child(1) {
   width: 12%;
   text-align: center;
 }
 
-.courseRow div:nth-child(2) {
+.courseRow .course:nth-child(2) {
   width: 20%;
   font-weight: bold;
 }
 
-.courseRow div:nth-child(3) {
+.courseRow .course:nth-child(3) {
   width: 45%;
 }
 
-.courseRow div:nth-child(4) {
+.courseRow .course:nth-child(4) {
   width: 12%;
   text-align: center;
 }
 
-.courseRow div:nth-child(5) {
+.courseRow .course:nth-child(5) {
   position: relative;
   width: 6%;
 }
 
-.courseRow div {
+.courseRow .course {
   padding: 20px 5px;
 }
 
 .dropdown {
+  /* display: none; */
   position: absolute;
-  background: rgba(0, 128, 128, .3);
+  top: 50px;
+  left: -115px;
+  width: 150px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 -1px 4px rgb(161, 161, 161);
+  z-index: 10;
+}
+
+.dropdown::after,
+.dropdown::before {
+  content: '';
+  position: absolute;
+  background: white;
+  left: 120px;
+  bottom: 74px;
+  width: 16px;
+  height: 16px;
+  box-shadow: -2px -2px 2px rgba(161, 161, 161, .5);
+  transform: rotate(45deg);
+}
+
+.dropdown::before {
+  box-shadow: none;
+}
+
+.editButton,
+.deleteButton {
+  padding-left: .8em;
+  padding-right: .8em;
+}
+
+.editButton {
+  padding-top: 1.1em;
+  padding-bottom: .74em;
+}
+
+.deleteButton {
+  padding-bottom: 1.1em;
 }

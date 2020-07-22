@@ -16,9 +16,14 @@
 }
 
 .barWrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1em;
+}
+
+.barWrapper input {
+  margin-right: 1em;
 }
 
 .menuDots {
@@ -43,8 +48,7 @@
 }
 
 .searchBar {
-  width: 71%;
-  margin-right: 1em;
+  width: 100%;
   border: #fff;
   border-radius: 5px;
   padding: 0 2em;
@@ -137,8 +141,8 @@
 
 .editButton,
 .deleteButton {
-  padding-left: .8em;
-  padding-right: .8em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .editButton {
@@ -148,4 +152,12 @@
 
 .deleteButton {
   padding-bottom: 1.1em;
+}
+
+.editIcon,
+.deleteIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 1em;
+  vertical-align: top;
 }

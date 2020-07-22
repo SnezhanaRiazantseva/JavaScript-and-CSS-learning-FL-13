@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import editIcon from './edit.svg';
+import deleteIcon from "./delete.svg";
 
 const COURSES = [
   { date: "18.02.18", name: "Prerequisites", description: "Webpack, Angular CLI, TypeScript.", duration: "1:34" },
@@ -11,20 +13,18 @@ const COURSES = [
 
 class OptionsDropdown extends React.Component {
   render() {
-    return(
-      <div className='dropdown'>
+    return (
+      <div className="dropdown">
         <div className="editButton">
-          <span className="menuDots"> &#183; &#183; &#183; &#8195;</span>
-          {/* <img src='../edit.svg' alt='Edit icon' /> */}
+          <img src={editIcon} alt="Edit icon" className="editIcon" />
           <span>Edit</span>
         </div>
         <div className="deleteButton">
-          <span className="menuDots" > &#183; &#183; &#183; &#8195;</span>
-          {/* <img src='../delete.svg' alt='Delete icon'/> */}
+          <img src={deleteIcon} alt="Delete icon" className="deleteIcon" />
           <span>Delete</span>
         </div>
       </div>
-    )
+    );
   }
 }
 

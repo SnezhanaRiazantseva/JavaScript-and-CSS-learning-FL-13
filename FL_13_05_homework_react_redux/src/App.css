@@ -1,0 +1,112 @@
+.App {
+  display: flex;
+  min-height: 100vh;
+  /* position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+  font-family: sans-serif;
+  background-color: #eee;
+}
+
+.coursesPage {
+  max-width: 80%;
+  margin: 5em auto;
+}
+
+.barWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.menuDots {
+  white-space: nowrap;
+}
+
+.button {
+  width: 220px;
+  padding: 0.8em 0;
+  background: linear-gradient(#008080, #2e8b57);
+  color: #fff;
+  border: seagreen;
+  border-radius: 5px;
+  box-shadow: 0 0 4px seagreen;
+  font-size: 1em;
+  white-space: nowrap;
+}
+
+.button:active,
+.button:focus {
+  outline: none;
+}
+
+.searchBar {
+  width: 71%;
+  margin-right: 1em;
+  border: #fff;
+  border-radius: 5px;
+  padding: 0 2em;
+  color: transparent;
+  text-shadow: 0 0 0 rgb(161, 161, 161);
+  font-size: 1em;
+}
+
+.searchBar:active,
+.searchBar:focus {
+  outline: none;
+}
+
+.searchBar::placeholder {
+  color: rgb(161, 161, 161);
+  font-size: 1em;
+}
+
+.courseRow {
+  display: flex;
+  height: 90px;
+  align-items: center;
+  background-color: #fff;
+  border-top: 4px solid #eee;
+  border-bottom: 4px solid #eee;
+  border-radius: 10px;
+}
+
+.coursesTable {
+  width: 100%;
+}
+
+
+.courseRow div:nth-child(1) {
+  width: 12%;
+  text-align: center;
+}
+
+.courseRow div:nth-child(2) {
+  width: 20%;
+  font-weight: bold;
+}
+
+.courseRow div:nth-child(3) {
+  width: 45%;
+}
+
+.courseRow div:nth-child(4) {
+  width: 12%;
+  text-align: center;
+}
+
+.courseRow div:nth-child(5) {
+  position: relative;
+  width: 6%;
+}
+
+.courseRow div {
+  padding: 20px 5px;
+}
+
+.dropdown {
+  position: absolute;
+  background: rgba(0, 128, 128, .3);
+}

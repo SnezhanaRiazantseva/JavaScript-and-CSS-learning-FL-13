@@ -103,14 +103,64 @@ class CoursesPage extends React.Component {
   }
 }
 
-function App() {
-  return (
-    <div className="App"> 
-    {/* delete this div? */}
-      <CoursesPage/>
-    </div>
+class CourseForm extends React.Component {
+  render() {
+    let dateValue = "fromState";
+    return(
+      <form className="courseCreationForm">
+        <div className="mainInfoWrapper">
+          <label htmlFor="courseTitle">Title</label>
+          <input type="text" id="courseTitle" required></input>
+          <br/>
+          <label htmlFor="courseDescription">Description</label>
+          <textarea rows="10" id="courseDescription" required></textarea>
+        </div>
+        <div className="secondaryInfoWrapper">
+          <div className="infoWrapper">
+            <label htmlFor="courseDuration">Duration</label>
+            <input type="text" id="courseDuration" required></input>
+            <label htmlFor="courseAuthors">Authors</label>
+            <input type="text" id="courseAuthors" required></input>
+          </div>
+          <div className="dateWrapper">
+            <div className="dateInfoWrapper">
+              <label htmlFor="courseDate">Date</label>
+              <span>{dateValue}</span>
+            </div>
+            <input type="date" id="courseDate" required></input>
+          </div>
+        </div>
+        <div className="buttonsWrapper">
+          <Button/>
+          <input type="reset" value="Cancel"/>
+        </div>
+      </form>
     );
   }
+}
+
+class CourseCreationPage extends React.Component {
+  render() {
+    return(
+      <div className="courseCreationPage">
+        <h1>... course</h1>
+        <CourseForm />
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App"> 
+      {/* delete this div? */}
+        {/* <CoursesPage/> */}
+        <CourseCreationPage />
+      </div>
+      );
+  }
+}
 
 export default App;
 

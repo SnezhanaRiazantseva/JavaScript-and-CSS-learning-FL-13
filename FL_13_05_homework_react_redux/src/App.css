@@ -1,18 +1,13 @@
 .App {
   display: flex;
   min-height: 100vh;
-  /* position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0; */
   font-family: sans-serif;
   background-color: #eee;
 }
 
 .coursesPage {
   max-width: 80%;
-  margin: 5em auto;
+  margin: 4.4em auto;
 }
 
 .barWrapper {
@@ -160,4 +155,82 @@
   height: 16px;
   margin-right: 1em;
   vertical-align: top;
+}
+
+.courseCreationPage {
+  width: 50%;
+  margin: 4.4em auto;
+}
+
+.courseCreationPage h1 {
+  text-align: center;
+  margin-bottom: 1.6em;
+}
+
+.courseCreationForm {
+  position: relative;
+}
+
+.courseCreationForm input:not([type*=reset]) {
+  width: 100%;
+  height: 30px;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.courseCreationForm input:active,
+.courseCreationForm input:focus,
+.courseCreationForm textarea:active,
+.courseCreationForm textarea:focus {
+  outline: none;
+  /* padding-left: 3px; */
+}
+
+.courseCreationForm label:not([for*=courseDate]) {
+  display: block;
+  padding: 5px 2px;
+}
+
+.courseCreationForm textarea {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.secondaryInfoWrapper {
+  display: flex;
+  margin-top: 2em;
+}
+
+.infoWrapper {
+  flex: 1;
+  margin-right: 4em;
+}
+
+.buttonsWrapper {
+  margin-top: 4em;
+}
+
+.buttonsWrapper input {
+  margin-left: 4em;
+}
+
+.dateInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+
+.dateInfoWrapper span {
+  color: teal;
+}
+
+.courseCreationForm input[type*=reset] {
+  border: none;
+  color: rgb(161, 161, 161);
+  font-size: 1em;
 }

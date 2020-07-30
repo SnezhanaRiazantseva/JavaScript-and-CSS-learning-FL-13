@@ -8,10 +8,13 @@
   box-shadow: 0 0 4px seagreen;
   font-size: 1em;
   white-space: nowrap;
-  cursor: pointer;
 }
 
 .Button:active,
 .Button:focus {
   outline: none;
+}
+
+.Button:hover{
+  cursor: pointer;
 }

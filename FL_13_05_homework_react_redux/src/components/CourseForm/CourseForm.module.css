@@ -41,12 +41,14 @@
 }
 
 .buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
   margin-top: 4em;
 }
 
-.buttonsWrapper input {
+/* .buttonsWrapper input {
   margin-left: 4em;
-}
+} */
 
 .dateInfoWrapper {
   display: flex;
@@ -59,9 +61,44 @@
   color: teal;
 }
 
-.CourseCreationForm input[type*=reset] {
+.CourseCreationForm input[type*=reset],
+.CourseCreationForm input[type*=submit] {
+  height: 44px;
+  padding: 0.8em 0;
   border: none;
   color: rgb(161, 161, 161);
   font-size: 1em;
   cursor: pointer;
+  background: transparent;
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.CourseCreationForm input[type*=submit] {
+  flex: 3;
+  margin-right: 3.2em;
+}
+.CourseCreationForm input[type*=reset] {
+  flex: 2;
+}
+
+.CourseCreationForm input[type*=reset]:active,
+.CourseCreationForm input[type*=submit]:active,
+.CourseCreationForm input[type*=reset]:focus,
+.CourseCreationForm input[type*=submit]:focus {
+  outline: none;
+}
+
+.CourseCreationForm input[type*=reset]:hover,
+.CourseCreationForm input.active {
+  background: linear-gradient(#008080, #2e8b57);
+  color: #fff;
+  border: seagreen;
+  border-radius: 5px;
+  box-shadow: 0 0 4px seagreen;
+  font-size: 1em;
+}
+
+.CourseCreationForm input[type*=submit].active:hover {
+  box-shadow: 0 0 4px 1px seagreen;
 }

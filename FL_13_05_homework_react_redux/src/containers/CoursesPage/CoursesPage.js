@@ -14,7 +14,7 @@ const CoursesPage = props => {
           searchedCourses={props.searchedCourses}
           onChange={props.onChange}
         />
-        <Button actionType={props.actionType}/>
+        <Button actionType={props.actionType} onButtonClick={props.onButtonClick} />
       </div>
       <CoursesTable 
         courses ={

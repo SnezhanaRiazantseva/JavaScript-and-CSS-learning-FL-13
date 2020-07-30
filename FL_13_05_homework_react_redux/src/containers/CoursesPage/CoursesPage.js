@@ -5,7 +5,6 @@ import Button from '../../components/UI/Button/Button'
 import CoursesTable from '../../components/CoursesTable/CoursesTable'
 
 const CoursesPage = props => {
-  // console.log('CoursesPage:', props)
   return(
     <div className={classes.CoursesPage}>
       <div className={classes.barWrapper}>

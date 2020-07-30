@@ -5,7 +5,7 @@ import deleteIcon from '../../delete.svg';
 
 const OptionsDropdown = props => {
     return (
-      <div className={classes.Dropdown}>
+      <div className={classes.DropdownMenu} hidden={true}>
         <div className={classes.editButton}>
           <img src={editIcon} alt="Edit icon" className={classes.editIcon} />
           <span>Edit</span>

@@ -1,8 +1,7 @@
-.Dropdown {
-  /* display: none; */
+.DropdownMenu {
   position: absolute;
   top: 50px;
-  left: -100px;
+  left: -90px;
   width: 150px;
   background: #fff;
   border-radius: 5px;
@@ -10,8 +9,8 @@
   z-index: 10;
 }
 
-.Dropdown::after,
-.Dropdown::before {
+.DropdownMenu::after,
+.DropdownMenu::before {
   content: '';
   position: absolute;
   background: white;
@@ -23,7 +22,7 @@
   transform: rotate(45deg);
 }
 
-.Dropdown::before {
+.DropdownMenu::before {
   box-shadow: none;
 }
 

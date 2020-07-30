@@ -45,9 +45,53 @@ class App extends React.Component {
     })
   }
 
+  onClickDropdownHandler = event => {
+    event.preventDefault();
+    if (event.target.matches('div[class*=menuDots]')) {
+      let dropdownArr = document.querySelectorAll('div[class*=DropdownMenu]');
+      for (let dropdownElem of dropdownArr) {
+        dropdownElem.hidden = true;
+      }
+      let parentDiv = event.target.closest('div[class*=course]');
+      let dropdown = parentDiv.querySelector('div[class*=DropdownMenu]');
+
+      if (dropdown.hidden) {
+        dropdown.hidden = false;
+      } else {
+        dropdown.hidden = true;
+      }
+    } else if (event.target.closest('div[class*=DropdownMenu]')) {
+      if (event.target.closest('div[class*=deleteButton]')) {
+        let date = event.target.closest('div[class*=CourseRowWrapper]').querySelector('div:nth-child(1)').innerHTML;
+        let description = event.target.closest('div[class*=CourseRowWrapper]').querySelector('div:nth-child(3)').innerHTML;
+        let index = this.state.courses.reduce((acum, course, index) => {
+          if (course.date === date && course.description === description) {
+            acum = index;
+          }
+          return acum;
+        }, 0);
+        let courses = [...this.state.courses];
+
+        courses.splice(index, 1);
+        this.setState({courses});
+      }
+      if (event.target.closest('div[class*=editButton]')) {
+        this.setState({actionType: 'edit'});
+      }
+    } else {
+      let dropdownArr = document.querySelectorAll('div[class*=DropdownMenu]');
+      for (let dropdownElem of dropdownArr) {
+        dropdownElem.hidden = true;
+      }
+    }
+  }
+
   render() {
     return (
-      <div className={classes.App}>
+      <div 
+        className={classes.App}
+        onClick={event => this.onClickDropdownHandler(event)}
+      >
         {
           !!this.state.actionType 
           ? <CourseCreationPage course={this.state.typedCourseInfo} /> 
@@ -58,6 +102,7 @@ class App extends React.Component {
             searchedCourses={this.state.searchedCourses}
             actionType={this.state.actionType}
             onChange={event => this.onChangeHandler(event)}
+            // onClickDropdownHandler={event => this.onClickDropdownHandler(event)}
           />
         }
       </div>

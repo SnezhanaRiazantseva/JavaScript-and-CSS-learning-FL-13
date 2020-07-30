@@ -5,7 +5,7 @@
   background-color: #eee;
 }
 
-.coursesPage {
+/* .coursesPage {
   max-width: 80%;
   margin: 4.4em auto;
 }
@@ -19,10 +19,6 @@
 
 .barWrapper input {
   margin-right: 1em;
-}
-
-.menuDots {
-  white-space: nowrap;
 }
 
 .button {
@@ -40,9 +36,9 @@
 .button:active,
 .button:focus {
   outline: none;
-}
+} */
 
-.searchBar {
+/* .searchBar {
   width: 100%;
   border: #fff;
   border-radius: 5px;
@@ -60,9 +56,14 @@
 .searchBar::placeholder {
   color: rgb(161, 161, 161);
   font-size: 1em;
-}
+} */
 
-.courseRow {
+/* 
+.coursesTable {
+  width: 100%;
+} */
+
+/* .courseRow {
   display: flex;
   height: 90px;
   align-items: center;
@@ -72,10 +73,9 @@
   border-radius: 10px;
 }
 
-.coursesTable {
-  width: 100%;
+.menuDots {
+  white-space: nowrap;
 }
-
 
 .courseRow .course:nth-child(1) {
   width: 12%;
@@ -103,11 +103,11 @@
 
 .courseRow .course {
   padding: 20px 5px;
-}
+} */
 
-.dropdown {
+/* .dropdown { */
   /* display: none; */
-  position: absolute;
+  /* position: absolute;
   top: 50px;
   left: -115px;
   width: 150px;
@@ -155,9 +155,9 @@
   height: 16px;
   margin-right: 1em;
   vertical-align: top;
-}
+} */
 
-.courseCreationPage {
+/* .courseCreationPage {
   width: 50%;
   margin: 4.4em auto;
 }
@@ -165,9 +165,9 @@
 .courseCreationPage h1 {
   text-align: center;
   margin-bottom: 1.6em;
-}
+} */
 
-.courseCreationForm {
+/* .courseCreationForm {
   position: relative;
 }
 
@@ -184,7 +184,6 @@
 .courseCreationForm textarea:active,
 .courseCreationForm textarea:focus {
   outline: none;
-  /* padding-left: 3px; */
 }
 
 .courseCreationForm label:not([for*=courseDate]) {
@@ -197,7 +196,7 @@
   max-width: 100%;
   border: 1px solid rgb(161, 161, 161);
   border-radius: 5px;
-  padding-left: 10px;
+  padding: 10px 0 10px 10px;
 }
 
 .secondaryInfoWrapper {
@@ -233,4 +232,4 @@
   border: none;
   color: rgb(161, 161, 161);
   font-size: 1em;
-}
+} */

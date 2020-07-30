@@ -1,0 +1,16 @@
+.CoursesPage {
+  width: 80%;
+  max-width: 80%;
+  margin: 4.4em auto;
+}
+
+.barWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.barWrapper input {
+  margin-right: 1em;
+}

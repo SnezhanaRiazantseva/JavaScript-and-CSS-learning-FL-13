@@ -1,0 +1,67 @@
+.CourseCreationForm {
+  position: relative;
+}
+
+.CourseCreationForm input:not([type*=reset]) {
+  width: 100%;
+  height: 30px;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.CourseCreationForm input:active,
+.CourseCreationForm input:focus,
+.CourseCreationForm textarea:active,
+.CourseCreationForm textarea:focus {
+  outline: none;
+}
+
+.CourseCreationForm label:not([for*=courseDate]) {
+  display: block;
+  padding: 5px 2px;
+}
+
+.CourseCreationForm textarea {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+  padding: 10px 0 10px 10px;
+}
+
+.secondaryInfoWrapper {
+  display: flex;
+  margin-top: 2em;
+}
+
+.infoWrapper {
+  flex: 1;
+  margin-right: 4em;
+}
+
+.buttonsWrapper {
+  margin-top: 4em;
+}
+
+.buttonsWrapper input {
+  margin-left: 4em;
+}
+
+.dateInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+
+.dateInfoWrapper span {
+  color: teal;
+}
+
+.CourseCreationForm input[type*=reset] {
+  border: none;
+  color: rgb(161, 161, 161);
+  font-size: 1em;
+  cursor: pointer;
+}

@@ -1,0 +1,47 @@
+.CourseRow {
+  display: flex;
+  height: 90px;
+  align-items: center;
+  background-color: #fff;
+  border-top: 4px solid #eee;
+  border-bottom: 4px solid #eee;
+  border-radius: 10px;
+}
+
+.menuDots {
+  white-space: nowrap;
+  padding: .6em 1em;
+}
+
+.menuDots:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.CourseRow .course:nth-child(1) {
+  width: 12%;
+  text-align: center;
+}
+
+.CourseRow .course:nth-child(2) {
+  width: 20%;
+  font-weight: bold;
+}
+
+.CourseRow .course:nth-child(3) {
+  width: 45%;
+}
+
+.CourseRow .course:nth-child(4) {
+  width: 12%;
+  text-align: center;
+}
+
+.CourseRow .course:nth-child(5) {
+  position: relative;
+  width: 6%;
+}
+
+.CourseRow .course {
+  padding: 15px 5px;
+}

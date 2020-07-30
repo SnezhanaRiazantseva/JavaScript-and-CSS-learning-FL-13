@@ -1,0 +1,23 @@
+.SearchBar {
+  width: 100%;
+  border: #fff;
+  border-radius: 5px;
+  padding: 0 2em;
+  color: transparent;
+  text-shadow: 0 0 0 rgb(161, 161, 161);
+  font-size: 1em;
+}
+
+.SearchBar:active,
+.SearchBar:focus {
+  outline: none;
+}
+
+/* .SearchBar::placeholder {
+  color: rgb(161, 161, 161);
+  font-size: 1em;
+} */
+
+.SearchBar::-webkit-search-cancel-button {
+  cursor: pointer;
+}

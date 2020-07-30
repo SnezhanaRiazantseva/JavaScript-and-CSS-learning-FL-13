@@ -1,0 +1,17 @@
+.Button {
+  width: 220px;
+  padding: 0.8em 0;
+  background: linear-gradient(#008080, #2e8b57);
+  color: #fff;
+  border: seagreen;
+  border-radius: 5px;
+  box-shadow: 0 0 4px seagreen;
+  font-size: 1em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.Button:active,
+.Button:focus {
+  outline: none;
+}

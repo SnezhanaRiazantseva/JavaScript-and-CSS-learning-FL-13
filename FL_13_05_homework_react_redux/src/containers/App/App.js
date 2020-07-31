@@ -1,29 +1,13 @@
 import React from 'react';
 import classes from './App.module.css';
-import CoursesPage from './containers/CoursesPage/CoursesPage';
-import CourseCreationPage from './containers/CourseCreationPage/CourseCreationPage';
+import CoursesPage from '../../components/CoursesPage/CoursesPage';
+import CourseCreationPage from '../../components/CourseCreationPage/CourseCreationPage';
+import addInitialStorage from '../../addInitialStorage';
+import filterCourses from '../../filterCourses';
 
-const COURSES = [
-  { date: "18.02.18", name: "Prerequisites", description: "Webpack, Angular CLI, TypeScript.", duration: "1:34" },
-  { date: "01.02.18", name: "Components", description: "Components; lifecicle, templete DSL and data-binding, Custom component.", duration: "2:10" },
-  { date: "15.01.18", name: "Directives + Pipes", description: "Directives, types pf directives, built-in directives, custom directive, pipes, built-in pipes, custom pipes, async pipe...", duration: "1:34" },
-  { date: "28.12.17", name: "Modules & Services", description: "Services, DI, modules, lazy Loading.", duration: "10:00" },
-];
-
-function addInitialStorage() {
-  if (localStorage.getItem('courses')) {
-    return;
-  } else {
-    localStorage.setItem('courses', JSON.stringify(COURSES));
-  }
-}
 addInitialStorage();
 
 let courses = JSON.parse(localStorage.getItem('courses'));
-
-function filterCourses(searchText, courses) {
-  return courses.filter(course => new RegExp(searchText, 'ig').test(course.name));
-}
 
 class App extends React.Component {
   state = {
@@ -61,63 +45,53 @@ class App extends React.Component {
         if (this.state.typedCourseInfo.name !== event.target.value) {
           let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
           typedCourseInfo.name = event.target.value;
-          this.setState({
-            typedCourseInfo
-          })
+          this.setState((state) => {return { typedCourseInfo }});
         }
         break;
       case 'courseDescription':
         if (this.state.typedCourseInfo.description !== event.target.value) {
           let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
           typedCourseInfo.description = event.target.value;
-          this.setState({
-            typedCourseInfo
-          })
+          this.setState((state) => {return { typedCourseInfo }});
         }
         break;
       case 'courseDuration':
         if (this.state.typedCourseInfo.duration !== event.target.value) {
           let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
           typedCourseInfo.duration = event.target.value;
-          this.setState({
-            typedCourseInfo
-          })
+          this.setState((state) => {return { typedCourseInfo }});
         }
         break;
       case 'courseAuthors':
         if (this.state.typedCourseInfo.duration !== event.target.value) {
           let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
           typedCourseInfo.authors = event.target.value;
-          this.setState({
-            typedCourseInfo
-          })
+          this.setState((state) => {return { typedCourseInfo }});
         }
         break;
       case 'courseDate':
         if (this.state.typedCourseInfo.duration !== event.target.value) {
           let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
           typedCourseInfo.date = event.target.value;
-          this.setState({
-            typedCourseInfo
-          })
+          this.setState((state) => {return { typedCourseInfo }});
         }
         break;
       default: 
         break;
     }
-
-    let isFormValid = Object.values(this.state.typedCourseInfo).reduce((acum, value) => {
+    let inputArr = Object.values(this.state.typedCourseInfo);
+    let countOfValidInputs = inputArr.reduce((acum, value) => {
       if (value.trim()) {
         acum += 1;
       }
       return acum;
-    }, 0) === 4;
-    this.setState({ isFormValid });
-    // console.log(isFormValid);
+    }, 0);
+    let isFormValid = countOfValidInputs === 5;
+    this.setState((state) => {return { isFormValid }});
+    console.log(isFormValid, countOfValidInputs, inputArr.length, inputArr);
   }
 
   onClickDropdownHandler = event => {
-    // event.preventDefault();
     if (event.target.matches('div[class*=menuDots]')) {
       let dropdownArr = document.querySelectorAll('div[class*=DropdownMenu]');
       for (let dropdownElem of dropdownArr) {
@@ -175,8 +149,12 @@ class App extends React.Component {
     if (this.state.actionType === 'Add') {
       let courses = [...this.state.courses];
       let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+      
+      typedCourseInfo.date = typedCourseInfo.date.split('-');
+      typedCourseInfo.date[0] = typedCourseInfo.date[0].slice(2);
+      typedCourseInfo.date = typedCourseInfo.date.reverse().join('.');
+
       courses.push(typedCourseInfo);
-      localStorage.courses = JSON.stringify(courses);
       this.setState((state) => {
         return {
           courses,
@@ -189,7 +167,6 @@ class App extends React.Component {
       let courses = [...this.state.courses];
       let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
       courses[this.state.index] = typedCourseInfo;
-      localStorage.courses = JSON.stringify(courses);
       this.setState((state) => {
         return {
           courses,

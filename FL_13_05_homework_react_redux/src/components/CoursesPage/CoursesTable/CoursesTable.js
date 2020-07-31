@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './CoursesTable.module.css';
-import CoursesRow from '../CoursesRow/CoursesRow'
+import CoursesRow from '../CoursesTable/CoursesRow/CoursesRow'
 
 const CoursesTable = props => {
   let rows = [];
@@ -13,7 +13,7 @@ const CoursesTable = props => {
     )
   })
   return (
-    <div className={classes.CoursesTable}>
+    <div className={classes.CoursesTable} >
       {rows}
     </div>
   )

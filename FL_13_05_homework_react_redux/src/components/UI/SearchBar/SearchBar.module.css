@@ -13,11 +13,6 @@
   outline: none;
 }
 
-/* .SearchBar::placeholder {
-  color: rgb(161, 161, 161);
-  font-size: 1em;
-} */
-
 .SearchBar::-webkit-search-cancel-button {
   cursor: pointer;
 }

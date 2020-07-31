@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './CoursesPage.module.css';
-import SearchBar from '../../components/UI/SearchBar/SearchBar'
-import Button from '../../components/UI/Button/Button'
-import CoursesTable from '../../components/CoursesTable/CoursesTable'
+import SearchBar from '../UI/SearchBar/SearchBar'
+import Button from '../UI/Button/Button'
+import CoursesTable from '../CoursesPage/CoursesTable/CoursesTable'
 
 const CoursesPage = props => {
   return(
@@ -14,7 +14,10 @@ const CoursesPage = props => {
           searchedCourses={props.searchedCourses}
           onChange={props.onChange}
         />
-        <Button actionType={props.actionType} onButtonClick={props.onButtonClick} />
+        <Button 
+          actionType={props.actionType} 
+          onButtonClick={props.onButtonClick} 
+        />
       </div>
       <CoursesTable 
         courses ={

@@ -21,10 +21,10 @@ const CourseForm = props => {
   }
 
   return(
-    <form className={classes.CourseCreationForm} onSubmit={props.onSubmitClick}>
+    <form className={classes.CourseCreationForm} onSubmit={props.onSubmitClick} >
       <div className={classes.mainInfoWrapper}>
         <label htmlFor="courseTitle">Title</label>
-        <input 
+        <input
           type="text" 
           id="courseTitle" 
           required 

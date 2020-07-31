@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './OptionsDropdown.module.css';
-import editIcon from '../../edit.svg';
-import deleteIcon from '../../delete.svg';
+import editIcon from '../../../../../edit.svg';
+import deleteIcon from '../../../../../delete.svg';
 
 const OptionsDropdown = props => {
     return (

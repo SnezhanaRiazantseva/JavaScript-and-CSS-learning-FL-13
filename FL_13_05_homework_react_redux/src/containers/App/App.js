@@ -9,40 +9,17 @@ import {
   searchBarNoSearch,
   searchBarSetState,
   actionTypeSetType,
+  deleteCourse,
+  openEditCoursePage,
+  inputUpdateCourseInfo,
+  checkIsFormValid,
+  submitAddCourse,
+  submitEditCourse,
 } from '../../store/actions/app';
 
 addInitialStorage();
 
-// let courses = JSON.parse(localStorage.getItem('courses'));
-
 class App extends React.Component {
-  // state = {
-    // courses: courses,
-    // searchText: '',
-    // isSearched: false,
-    // searchedCourses: [],
-    // actionType: null,
-    // typedCourseInfo: {},
-    // isFormValid: false,
-    // index: null
-  // }
-  
-  // onChangeHandler = event => {
-  //   event.preventDefault();
-  //   if (!event.target.value.trim()) {
-  //     this.setState({
-  //       searchText: '',
-  //       isSearched: false,
-  //       searchedCourses: [],
-  //     })
-  //     return;
-  //   }
-  //   this.setState({
-  //     searchText: event.target.value,
-  //     isSearched: true,
-  //     searchedCourses: filterCourses(event.target.value, this.state.courses),
-  //   })
-  // }
 
   onSearchBarChangeHandler = event => {
     event.preventDefault();
@@ -58,44 +35,44 @@ class App extends React.Component {
     event.preventDefault();
     switch (event.target.id) {
       case 'courseTitle':
-        if (this.state.typedCourseInfo.name !== event.target.value) {
-          let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+        if (this.props.typedCourseInfo.name !== event.target.value) {
+          let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
           typedCourseInfo.name = event.target.value;
-          this.setState((state) => {return { typedCourseInfo }});
+          this.props.inputUpdateCourseInfo(typedCourseInfo);
         }
         break;
       case 'courseDescription':
-        if (this.state.typedCourseInfo.description !== event.target.value) {
-          let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+        if (this.props.typedCourseInfo.description !== event.target.value) {
+          let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
           typedCourseInfo.description = event.target.value;
-          this.setState((state) => {return { typedCourseInfo }});
+          this.props.inputUpdateCourseInfo(typedCourseInfo);
         }
         break;
       case 'courseDuration':
-        if (this.state.typedCourseInfo.duration !== event.target.value) {
-          let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+        if (this.props.typedCourseInfo.duration !== event.target.value) {
+          let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
           typedCourseInfo.duration = event.target.value;
-          this.setState((state) => {return { typedCourseInfo }});
+          this.props.inputUpdateCourseInfo(typedCourseInfo);
         }
         break;
       case 'courseAuthors':
-        if (this.state.typedCourseInfo.duration !== event.target.value) {
-          let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+        if (this.props.typedCourseInfo.duration !== event.target.value) {
+          let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
           typedCourseInfo.authors = event.target.value;
-          this.setState((state) => {return { typedCourseInfo }});
+          this.props.inputUpdateCourseInfo(typedCourseInfo);
         }
         break;
       case 'courseDate':
-        if (this.state.typedCourseInfo.duration !== event.target.value) {
-          let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+        if (this.props.typedCourseInfo.duration !== event.target.value) {
+          let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
           typedCourseInfo.date = event.target.value;
-          this.setState((state) => {return { typedCourseInfo }});
+          this.props.inputUpdateCourseInfo(typedCourseInfo);
         }
         break;
       default: 
         break;
     }
-    let inputArr = Object.values(this.state.typedCourseInfo);
+    let inputArr = Object.values(this.props.typedCourseInfo);
     let countOfValidInputs = inputArr.reduce((acum, value) => {
       if (value.trim()) {
         acum += 1;
@@ -103,8 +80,7 @@ class App extends React.Component {
       return acum;
     }, 0);
     let isFormValid = countOfValidInputs === 5;
-    this.setState((state) => {return { isFormValid }});
-    console.log(isFormValid, countOfValidInputs, inputArr.length, inputArr);
+    this.props.checkIsFormValid(isFormValid);
   }
 
   onClickDropdownHandler = event => {
@@ -124,19 +100,20 @@ class App extends React.Component {
     } else if (event.target.closest('div[class*=DropdownMenu]')) {
       let date = event.target.closest('div[class*=CourseRowWrapper]').querySelector('div:nth-child(1)').innerHTML;
       let description = event.target.closest('div[class*=CourseRowWrapper]').querySelector('div:nth-child(3)').innerHTML;
-      let index = this.state.courses.reduce((acum, course, index) => {
+      let index = this.props.courses.reduce((acum, course, index) => {
         if (course.date === date && course.description === description) {
           acum = index;
         }
         return acum;
       }, 0);
       if (event.target.closest('div[class*=deleteButton]')) {
-        let courses = [...this.state.courses];
+        let courses = [...this.props.courses];
         courses.splice(index, 1);
-        this.setState({courses});
+        this.props.deleteCourse(courses);
       }
       if (event.target.closest('div[class*=editButton]')) {
-        this.setState({actionType: 'Edit', typedCourseInfo: this.state.courses[index], index});
+        this.props.actionTypeSetType('Edit');
+        this.props.openEditCoursePage(this.props.courses[index], index);
       }
     } else {
       let dropdownArr = document.querySelectorAll('div[class*=DropdownMenu]');
@@ -160,39 +137,25 @@ class App extends React.Component {
 
   onSubmitClick = event => {
     event.preventDefault();
-    if (this.state.actionType === 'Add') {
-      let courses = [...this.state.courses];
-      let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
+    if (this.props.actionType === 'Add') {
+      let courses = [...this.props.courses];
+      let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
       
       typedCourseInfo.date = typedCourseInfo.date.split('-');
       typedCourseInfo.date[0] = typedCourseInfo.date[0].slice(2);
       typedCourseInfo.date = typedCourseInfo.date.reverse().join('.');
 
       courses.push(typedCourseInfo);
-      this.setState((state) => {
-        return {
-          courses,
-          typedCourseInfo: {},
-          actionType: null,
-        }
-      });
+      this.props.submitAddCourse(courses);
     }
-    if (this.state.actionType === 'Edit') {
-      let courses = [...this.state.courses];
-      let typedCourseInfo = Object.assign({}, this.state.typedCourseInfo);
-      courses[this.state.index] = typedCourseInfo;
-      this.setState((state) => {
-        return {
-          courses,
-          typedCourseInfo: {},
-          index: null,
-          actionType: null
-        }
-      });
+    if (this.props.actionType === 'Edit') {
+      let courses = [...this.props.courses];
+      let typedCourseInfo = Object.assign({}, this.props.typedCourseInfo);
+      courses[this.props.index] = typedCourseInfo;
+      this.props.submitEditCourse(courses);
     }
   }
   render() {
-    console.log('App render:', this.props);
     localStorage.courses = JSON.stringify(this.props.courses);
     return (
       <div 
@@ -241,7 +204,13 @@ function mapDispatchToProps(dispatch) {
   return {
     searchBarNoSearch: () => dispatch(searchBarNoSearch()),
     searchBarSetState: (searchText, searchedCourses) => dispatch(searchBarSetState(searchText, searchedCourses)),
-    actionTypeSetType: (type) => dispatch(actionTypeSetType(type)),
+    actionTypeSetType: type => dispatch(actionTypeSetType(type)),
+    deleteCourse: courses => dispatch(deleteCourse(courses)),
+    openEditCoursePage: (typedCourseInfo, index) => dispatch(openEditCoursePage(typedCourseInfo, index)),
+    inputUpdateCourseInfo: typedCourseInfo => dispatch(inputUpdateCourseInfo(typedCourseInfo)),
+    checkIsFormValid: isFormValid => dispatch(checkIsFormValid(isFormValid)),
+    submitAddCourse: courses => dispatch(submitAddCourse(courses)),
+    submitEditCourse: courses => dispatch(submitEditCourse(courses))
   }
 }
 

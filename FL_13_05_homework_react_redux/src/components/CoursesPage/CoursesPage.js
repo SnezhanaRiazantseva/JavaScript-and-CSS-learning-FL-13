@@ -12,7 +12,7 @@ const CoursesPage = props => {
           searchText={props.searchText}
           isSearched={props.isSearched}
           searchedCourses={props.searchedCourses}
-          onChange={props.onChange}
+          onChange={props.onSearchBarChangeHandler}
         />
         <Button 
           actionType={props.actionType} 

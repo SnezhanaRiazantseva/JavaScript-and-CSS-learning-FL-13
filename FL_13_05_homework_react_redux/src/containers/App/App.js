@@ -4,38 +4,54 @@ import CoursesPage from '../../components/CoursesPage/CoursesPage';
 import CourseCreationPage from '../../components/CourseCreationPage/CourseCreationPage';
 import addInitialStorage from '../../addInitialStorage';
 import filterCourses from '../../filterCourses';
+import {connect} from 'react-redux';
+import {
+  searchBarNoSearch,
+  searchBarSetState,
+  actionTypeSetType,
+} from '../../store/actions/app';
 
 addInitialStorage();
 
-let courses = JSON.parse(localStorage.getItem('courses'));
+// let courses = JSON.parse(localStorage.getItem('courses'));
 
 class App extends React.Component {
-  state = {
-    courses: courses,
-    searchText: '',
-    isSearched: false,
-    searchedCourses: [],
-    actionType: null,
-    typedCourseInfo: {},
-    isFormValid: false,
-    index: null
-  }
+  // state = {
+    // courses: courses,
+    // searchText: '',
+    // isSearched: false,
+    // searchedCourses: [],
+    // actionType: null,
+    // typedCourseInfo: {},
+    // isFormValid: false,
+    // index: null
+  // }
   
-  onChangeHandler = event => {
+  // onChangeHandler = event => {
+  //   event.preventDefault();
+  //   if (!event.target.value.trim()) {
+  //     this.setState({
+  //       searchText: '',
+  //       isSearched: false,
+  //       searchedCourses: [],
+  //     })
+  //     return;
+  //   }
+  //   this.setState({
+  //     searchText: event.target.value,
+  //     isSearched: true,
+  //     searchedCourses: filterCourses(event.target.value, this.state.courses),
+  //   })
+  // }
+
+  onSearchBarChangeHandler = event => {
     event.preventDefault();
     if (!event.target.value.trim()) {
-      this.setState({
-        searchText: '',
-        isSearched: false,
-        searchedCourses: [],
-      })
+      this.props.searchBarNoSearch();
       return;
     }
-    this.setState({
-      searchText: event.target.value,
-      isSearched: true,
-      searchedCourses: filterCourses(event.target.value, this.state.courses),
-    })
+    let searchedCourses = filterCourses(event.target.value, this.props.courses);
+    this.props.searchBarSetState(event.target.value, searchedCourses);
   }
 
   onChangeCourseHandler = event => {
@@ -132,16 +148,14 @@ class App extends React.Component {
 
   onButtonClick = event => {
     event.preventDefault();
-    if (this.state.actionType === null) {
-      this.setState({actionType: 'Add'});
+    if (this.props.actionType === null) {
+      this.props.actionTypeSetType('Add');
     }
   }
 
   onCancelClick = event => {
     event.preventDefault();
-    this.setState({
-      actionType: null
-    });
+    this.props.actionTypeSetType(null);
   }
 
   onSubmitClick = event => {
@@ -177,31 +191,31 @@ class App extends React.Component {
       });
     }
   }
-
   render() {
-    localStorage.courses = JSON.stringify(this.state.courses);
+    console.log('App render:', this.props);
+    localStorage.courses = JSON.stringify(this.props.courses);
     return (
       <div 
         className={classes.App}
         onClick={event => this.onClickDropdownHandler(event)}
       >
         {
-          !!this.state.actionType 
+          !!this.props.actionType 
           ? <CourseCreationPage 
-            typedCourseInfo={this.state.typedCourseInfo}
-            actionType={this.state.actionType}
+            typedCourseInfo={this.props.typedCourseInfo}
+            actionType={this.props.actionType}
             onChangeCourseHandler={event => this.onChangeCourseHandler(event)}
             onCancelClick={event => this.onCancelClick(event)}
             onSubmitClick={event => this.onSubmitClick(event)}
-            isFormValid={this.state.isFormValid}
+            isFormValid={this.props.isFormValid}
           /> 
           : <CoursesPage 
-            courses={this.state.courses} 
-            searchText={this.state.searchText}
-            isSearched={this.state.isSearched}
-            searchedCourses={this.state.searchedCourses}
-            actionType={this.state.actionType}
-            onChange={event => this.onChangeHandler(event)}
+            courses={this.props.courses} 
+            searchText={this.props.searchText}
+            isSearched={this.props.isSearched}
+            searchedCourses={this.props.searchedCourses}
+            actionType={this.props.actionType}
+            onSearchBarChangeHandler={event => this.onSearchBarChangeHandler(event)}
             onButtonClick={event => this.onButtonClick(event)}
           />
         }
@@ -210,4 +224,25 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    courses: state.app.courses,
+    searchText: state.app.searchText,
+    isSearched: state.app.isSearched,
+    searchedCourses: state.app.searchedCourses,
+    actionType: state.app.actionType,
+    typedCourseInfo: state.app.typedCourseInfo,
+    isFormValid: state.app.isFormValid,
+    index: state.app.index,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    searchBarNoSearch: () => dispatch(searchBarNoSearch()),
+    searchBarSetState: (searchText, searchedCourses) => dispatch(searchBarSetState(searchText, searchedCourses)),
+    actionTypeSetType: (type) => dispatch(actionTypeSetType(type)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

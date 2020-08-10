@@ -1,157 +1,32 @@
-// const employeeData = [
-//   {
-//     id: 1,
-//     rm_id: null,
-//     name: 'Ange Quittonden',
-//     performance: 'top',
-//     last_vacation_date: '24.04.2018',
-//     salary: 1415,
-//     pool_name: 'Top pool',
-//   },
-//   {
-//     id: 2,
-//     rm_id: 1,
-//     name: 'Bobina Pascow',
-//     performance: 'low',
-//     last_vacation_date: '26.12.2018',
-//     salary: 1248,
-//   },
-//   {
-//     id: 3,
-//     rm_id: 1,
-//     name: 'Hashim Stein',
-//     performance: 'top',
-//     last_vacation_date: '07.06.2019',
-//     salary: 679,
-//   },
-//   {
-//     id: 4,
-//     rm_id: 1,
-//     name: 'Bernadene Gillum',
-//     performance: 'average',
-//     last_vacation_date: '19.10.2019',
-//     salary: 1484,
-//   },
-//   {
-//     id: 5,
-//     rm_id: 1,
-//     name: 'Yale Masedon',
-//     performance: 'average',
-//     last_vacation_date: '10.03.2020',
-//     salary: 583,
-//   },
-//   {
-//     id: 6,
-//     rm_id: 1,
-//     name: 'Ellissa Cayton',
-//     performance: 'top',
-//     last_vacation_date: '26.10.2019',
-//     salary: 1289,
-//   },
-//   {
-//     id: 7,
-//     rm_id: 1,
-//     name: 'Marybelle Kelston',
-//     performance: 'top',
-//     last_vacation_date: '13.03.2018',
-//     salary: 1382,
-//     pool_name: 'Oscar',
-//   },
-//   {
-//     id: 8,
-//     rm_id: 1,
-//     name: 'Vevay Cowern',
-//     performance: 'average',
-//     last_vacation_date: '17.11.2018',
-//     salary: 1301,
-//   },
-//   {
-//     id: 9,
-//     rm_id: 1,
-//     name: 'Bondy Ridolfo',
-//     performance: 'low',
-//     last_vacation_date: '15.06.2018',
-//     salary: 1146,
-//   },
-//   {
-//     id: 10,
-//     rm_id: 1,
-//     name: 'Valenka Macguire',
-//     performance: 'low',
-//     last_vacation_date: '03.05.2017',
-//     salary: 1236,
-//   },
-//   {
-//     id: 11,
-//     rm_id: 7,
-//     name: 'Irene Prodrick',
-//     performance: 'low',
-//     last_vacation_date: '06.01.2019',
-//     salary: 1371,
-//   },
-//   {
-//     id: 12,
-//     rm_id: 7,
-//     name: 'Ella Kilpin',
-//     performance: 'top',
-//     last_vacation_date: '08.11.2018',
-//     salary: 739,
-//   },
-//   {
-//     id: 13,
-//     rm_id: 7,
-//     name: 'Raeann Regenhardt',
-//     performance: 'top',
-//     last_vacation_date: '19.01.2018',
-//     salary: 1450,
-//   },
-//   {
-//     id: 14,
-//     rm_id: 7,
-//     name: 'Emile Jobbins',
-//     performance: 'low',
-//     last_vacation_date: '03.09.2019',
-//     salary: 1452,
-//   },
-//   {
-//     id: 15,
-//     rm_id: 1,
-//     name: "Richard D'Antonio",
-//     performance: 'low',
-//     last_vacation_date: '20.08.2019',
-//     salary: 788,
-//   },
-// ];
-
 window.addEventListener('load', function () {
   getInitialUsers();
 });
 
-// const sendHttpRequest = (method, url) => {
-//   const promise = new Promise((resolve) => {
-//     const xhr = new XMLHttpRequest();
+const sendHttpRequest = (method, url) => {
+  const promise = new Promise((resolve) => {
+    const xhr = new XMLHttpRequest();
 
-//     xhr.open(method, url);
+    xhr.open(method, url);
 
-//     xhr.responseType = 'json';
+    xhr.responseType = 'json';
 
-//     xhr.onload = function () {
-//       resolve(xhr.response);
-//       console.log(xhr.response);
-//     };
-//     xhr.send();
-//   });
-//   return promise;
-// };
+    xhr.onload = function () {
+      resolve(xhr.response);
+      console.log(xhr.response);
+    };
+    xhr.send();
+  });
+  return promise;
+};
 
-// function getInitialUsers() {
-//   sendHttpRequest(
-//     'GET',
-//     'https://roman4ak.github.io/fe-oop-lab/mocks/epms.json'
-//   )
-//     .then((responseData) => run(responseData))
-//     .catch(() => console.log('Error is here'));
-// }
+function getInitialUsers() {
+  sendHttpRequest(
+    'GET',
+    'https://roman4ak.github.io/fe-oop-lab/mocks/epms.json'
+  )
+    .then((responseData) => run(responseData))
+    .catch(() => console.log('Error is here'));
+}
 
 let Employee = function (
   id,

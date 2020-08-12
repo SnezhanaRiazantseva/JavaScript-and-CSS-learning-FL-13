@@ -13,7 +13,6 @@ export default function createUnitsTree(container, obj) {
   pageHeader.innerHTML = 'Units Tree';
   let colorPaleteLength = colorPalete.length;
   iForColors = colorPaleteLength - 1;
-  console.log(iForColors);
   container.innerHTML = createUnitsTreeText(obj);
 }
 
@@ -38,7 +37,7 @@ function createUnitsTreeText(node) {
       li += createUnitsTreeText(node.getChild(i));
     }
 
-    ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
+    ul = `<ul class="unitItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
     iForColors -= 1;
   }
   return ul || '';

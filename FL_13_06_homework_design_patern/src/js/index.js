@@ -1,3 +1,5 @@
+import '../scss/styles.scss';
+import '../scss/typography.scss';
 import createTree from './app/EmployeeTree/employeeTree';
 import createUnitsTree from './app/UnitsTree/unitsTree';
 import createWarningTree from './app/WraningTree/wraningTree';

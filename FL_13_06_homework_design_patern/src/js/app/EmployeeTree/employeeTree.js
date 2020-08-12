@@ -8,10 +8,8 @@ export default function createTree(container, obj) {
     return;
   }
   pageHeader.innerHTML = 'Employees Tree';
-  console.log(colorPalete);
   let colorPaleteLength = colorPalete.length;
   iForColors = colorPaleteLength - 1;
-  console.log(iForColors);
   container.innerHTML = createTreeText(obj);
 }
 
@@ -27,7 +25,7 @@ function createTreeText(node) {
     li += `</ul></li>`;
 
     if (li) {
-      ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
+      ul = `<ul class="ulLevelItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
     }
   } else {
     li += `${node.name}</li>`;

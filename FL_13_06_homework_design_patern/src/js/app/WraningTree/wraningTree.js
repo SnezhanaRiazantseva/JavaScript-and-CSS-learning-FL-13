@@ -18,8 +18,9 @@ export default function createWarningTree(container, obj) {
   pageHeader.innerHTML = 'Warning Employees Tree';
   let colorPaleteLength = colorPalete.length;
   iForColors = colorPaleteLength - 1;
-  console.log(iForColors);
-  container.innerHTML = createWarningTreeText(obj);
+  container.innerHTML =
+    '<p class="summary">Employees with low perfomance and too high salary:</p>' +
+    createWarningTreeText(obj);
 }
 
 function createWarningTreeText(node, averageSalary, averagePerfomanceData) {
@@ -39,7 +40,7 @@ function createWarningTreeText(node, averageSalary, averagePerfomanceData) {
       // eslint-disable-next-line prettier/prettier
       li += createWarningTreeText(node.getChild(i), averageSalary, averagePerfomanceData);
     }
-    ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
+    ul = `<ul class="warningUlItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
   } else {
     if (
       warningCriterion.chooseEmployees(node, averageSalary) &&

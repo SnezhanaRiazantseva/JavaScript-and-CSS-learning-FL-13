@@ -1,23 +1,10 @@
+import createTree from './app/EmployeeTree/employeeTree';
+import createUnitsTree from './app/UnitsTree/unitsTree';
+import createWarningTree from './app/WraningTree/wraningTree';
+
 window.addEventListener('load', function () {
   getInitialUsers();
 });
-
-// const sendHttpRequest = (method, url) => {
-//   const promise = new Promise((resolve) => {
-//     const xhr = new XMLHttpRequest();
-
-//     xhr.open(method, url);
-
-//     xhr.responseType = 'json';
-
-//     xhr.onload = function () {
-//       resolve(xhr.response);
-//       console.log(xhr.response);
-//     };
-//     xhr.send();
-//   });
-//   return promise;
-// };
 
 function getInitialUsers() {
   fetch('https://roman4ak.github.io/fe-oop-lab/mocks/epms.json').then(function (
@@ -25,7 +12,7 @@ function getInitialUsers() {
   ) {
     if (response.ok) {
       response.json().then(function (json) {
-        run(json);
+        buildEmployeeTree(json);
       });
     } else {
       document.getElementsByClassName(
@@ -34,12 +21,28 @@ function getInitialUsers() {
     }
   });
 }
-// sendHttpRequest(
-//   'GET',
-//   'https://roman4ak.github.io/fe-oop-lab/mocks/epms.json'
-// )
-//   .then((responseData) => run(responseData))
-//   .catch(() => console.log('Error is here'));
+
+let root = document.getElementsByClassName('root')[0];
+let nav = document.querySelector('nav');
+nav.addEventListener('click', menuBarHandler);
+let employeesPage = document.querySelector('[href*="employeeTree"]');
+let unitsPage = document.querySelector('[href*="unitsTree"]');
+let warningPage = document.querySelector('[href*="warningTree"]');
+export let pageHeader = document.querySelector('h2');
+let allCompanyEmployees;
+export const colorPalete = [
+  'rgba(255,192,203,.2)',
+  'rgba(255,182,193,.2)',
+  'rgba(255,105,180,.2)',
+  'rgba(255,20,147,.2)',
+  'rgba(219,112,147,.2)',
+  'rgba(199,21,133,.2)',
+  'rgba(205,92,92,.2)',
+  'rgba(240,128,128,.2)',
+  'rgba(233,150,122,.2)',
+  'rgba(250,128,114,.2)',
+  'rgba(188,143,143,.2)',
+];
 
 let Employee = function (
   id,
@@ -84,7 +87,54 @@ Employee.prototype = {
   },
 };
 
-function run(employeeData) {
+let WarningCriterion = function () {
+  this.criterion = '';
+};
+
+WarningCriterion.prototype = {
+  setStrategy: function (criterion) {
+    this.criterion = criterion;
+  },
+
+  chooseEmployees: function (employee, averageUnitSalary) {
+    return this.criterion.chooseEmployees(employee, averageUnitSalary);
+  },
+};
+
+let HIGH_SALARY = function () {
+  this.chooseEmployees = this.chooseEmployees = function (
+    employeeNode,
+    averageUnitSalary
+  ) {
+    return employeeNode.salary > averageUnitSalary;
+  };
+};
+
+let LOW_PERFOMANCE = function () {
+  this.chooseEmployees = this.chooseEmployees = function (employeeNode) {
+    return employeeNode.performance === 'low';
+  };
+};
+
+export let warningCriterion = new WarningCriterion();
+let highSalary = new HIGH_SALARY();
+warningCriterion.setStrategy(highSalary);
+export let twoWarningCriterion = new WarningCriterion();
+let lowPerfomance = new LOW_PERFOMANCE();
+twoWarningCriterion.setStrategy(lowPerfomance);
+
+function menuBarHandler(event) {
+  event.preventDefault();
+  if (event.target.contains(employeesPage)) {
+    createTree(root, allCompanyEmployees[0]);
+  } else if (event.target.contains(unitsPage)) {
+    createUnitsTree(root, allCompanyEmployees[0]);
+  } else if (event.target.contains(warningPage)) {
+    createWarningTree(root, allCompanyEmployees[0]);
+  }
+}
+
+function buildEmployeeTree(employeeData) {
   let employeeArray = employeeData.map((employee) => {
     return new Employee(
       employee.id,
@@ -105,253 +155,6 @@ function run(employeeData) {
     });
   });
 
-  let root = document.getElementsByClassName('root')[0];
-  let unitRoot = document.getElementsByClassName('unitRoot')[0];
-  console.log(unitRoot);
+  allCompanyEmployees = employeeArray;
   createTree(root, employeeArray[0]);
-  createUnitsTree(unitRoot, employeeArray[0]);
-
-  createWarningTree(root, employeeArray[0]);
-  // runStrategy(employeeArray[0]);
-}
-
-function createTree(container, obj) {
-  if (Object.entries(obj).length === 0 && obj.constructor === Object) {
-    document.getElementsByClassName('root')[0].innerHTML =
-      'В организации нету сотрудников.';
-    return;
-  }
-  // container.insertAdjacentHTML('afterend', createTreeText(obj));
-  container.innerHTML = createTreeText(obj);
-}
-
-const colorPalete = [
-  'rgba(255,192,203,.2)',
-  'rgba(255,182,193,.2)',
-  'rgba(255,105,180,.2)',
-  'rgba(255,20,147,.2)',
-  'rgba(219,112,147,.2)',
-  'rgba(199,21,133,.2)',
-  'rgba(205,92,92,.2)',
-  'rgba(240,128,128,.2)',
-  'rgba(233,150,122,.2)',
-  'rgba(250,128,114,.2)',
-  'rgba(188,143,143,.2)',
-];
-
-let iForColors = colorPalete.length - 1;
-
-function createTreeText(node) {
-  let li = '';
-  let ul;
-  li += `<li>`;
-  if (node.hasChildren()) {
-    li += `<strong>${node.name}</strong><ul>`;
-    for (let i = 0, len = node.children.length; i < len; i++) {
-      li += createTreeText(node.getChild(i));
-    }
-    li += `</ul></li>`;
-
-    if (li) {
-      ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
-    }
-  } else {
-    li += `${node.name}</li>`;
-    return li;
-  }
-  iForColors -= 1;
-  return ul || '';
-}
-
-function createUnitsTree(container, obj) {
-  if (Object.entries(obj).length === 0 && obj.constructor === Object) {
-    document.getElementsByClassName('Unitroot')[0].innerHTML =
-      'В организации нету подразделений.';
-    return;
-  }
-  container.innerHTML = createUnitsTreeText(obj);
-}
-
-const performancePalete = {
-  low: -1,
-  average: 0,
-  top: 1,
-  '-1': 'low',
-  '0': 'average',
-  '1': 'top',
-};
-
-function createUnitsTreeText(node) {
-  let li = '';
-  let ul;
-  li += `<li>`;
-  if (node.pool_name) {
-    // console.log(node);
-    // console.log(node.pool_name);
-    li += `<strong>${node.pool_name}</strong>`;
-
-    let unitAmount = node.children.length + 1;
-    const averagePerfomanceData = getAverageUnitPerfomance(node);
-    const averageUnitSalary = getAverageUnitSalary(node, unitAmount);
-
-    li += `<p>High perfomance: ${averagePerfomanceData.averageHighPerfomance} from ${unitAmount} empoyees.
-    Average perfomance: ${averagePerfomanceData.averageAveragePerfomance} from ${unitAmount} empoyees.
-    Low perfomance: ${averagePerfomanceData.averageLowPerfomance} from ${unitAmount} unitAmount.
-    Unit average perfomance is <b>${averagePerfomanceData.unitAveragePerfomance}</b>.</p>`;
-    // eslint-disable-next-line prettier/prettier
-    li += `<p>Average unit salary is <b>${averageUnitSalary}$</b>.</p></li>`;
-    for (let i = 0, len = node.children.length; i < len; i++) {
-      li += createUnitsTreeText(node.getChild(i));
-    }
-    // console.log(colorPalete[iForColors], iForColors);
-    ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
-    iForColors += 1;
-  }
-  return ul || '';
-}
-
-function getAverageUnitPerfomance(node) {
-  let averageLowPerfomance = node.children.reduce((acum, employee) => {
-    if (performancePalete[employee.performance] === -1) {
-      acum++;
-    }
-    return acum;
-  }, 0);
-  let averageAveragePerfomance = node.children.reduce((acum, employee) => {
-    if (performancePalete[employee.performance] === 0) {
-      acum++;
-    }
-    return acum;
-  }, 0);
-  let averageHighPerfomance = node.children.reduce((acum, employee) => {
-    if (performancePalete[employee.performance] === 1) {
-      acum++;
-    }
-    return acum;
-  }, 0);
-  if (node.performance === 'average') {
-    averageAveragePerfomance++;
-  } else if (node.performance === 'low') {
-    averageLowPerfomance++;
-  } else {
-    averageHighPerfomance++;
-  }
-  // let unitAmount = node.children.length + 1;
-  let allPerfomances = [
-    averageAveragePerfomance,
-    averageLowPerfomance,
-    averageHighPerfomance,
-  ];
-  let unitAveragePerfomance;
-  let maxQuantityPerfomance = Math.max.apply(null, allPerfomances);
-  if (maxQuantityPerfomance === allPerfomances[0]) {
-    unitAveragePerfomance = performancePalete[0];
-  } else if (maxQuantityPerfomance === allPerfomances[1]) {
-    unitAveragePerfomance = performancePalete[-1];
-  } else {
-    unitAveragePerfomance = performancePalete[1];
-  }
-  const averagePerfomanceData = {
-    // unitAmount,
-    averageHighPerfomance,
-    averageAveragePerfomance,
-    averageLowPerfomance,
-    unitAveragePerfomance,
-  };
-  return averagePerfomanceData;
-}
-
-function getAverageUnitSalary(node, unitAmount) {
-  let nodeChildrenSalary = node.children.reduce((amount, employee) => {
-    amount += employee.salary;
-    return amount;
-  }, 0);
-  let allSalary = nodeChildrenSalary + node.salary;
-  let averageUnitSalary = allSalary / unitAmount;
-  return averageUnitSalary.toFixed(2);
-}
-
-let WarningCriterion = function () {
-  this.criterion = '';
-};
-
-WarningCriterion.prototype = {
-  setStrategy: function (criterion) {
-    this.criterion = criterion;
-  },
-
-  chooseEmployees: function (employee, averageUnitSalary) {
-    return this.criterion.chooseEmployees(employee, averageUnitSalary);
-  },
-};
-
-// let LOW_SALARY = function () {
-//   this.chooseEmployees = this.chooseEmployees = function (
-//     employeeNode,
-//     averageUnitSalary
-//   ) {
-//     return employeeNode.salary < averageUnitSalary;
-//   };
-// };
-
-let HIGH_SALARY = function () {
-  this.chooseEmployees = this.chooseEmployees = function (
-    employeeNode,
-    averageUnitSalary
-  ) {
-    return employeeNode.salary > averageUnitSalary;
-  };
-};
-
-let LOW_PERFOMANCE = function () {
-  this.chooseEmployees = this.chooseEmployees = function (employeeNode) {
-    return employeeNode.performance === 'low';
-  };
-};
-
-let warningCriterion = new WarningCriterion();
-let highSalary = new HIGH_SALARY();
-warningCriterion.setStrategy(highSalary);
-let twoWarningCriterion = new WarningCriterion();
-let lowPerfomance = new LOW_PERFOMANCE();
-twoWarningCriterion.setStrategy(lowPerfomance);
-
-function createWarningTreeText(node, averageSalary, averagePerfomanceData) {
-  let li = '';
-  let ul;
-  if (node.hasChildren()) {
-    li += `<p><strong>${node.pool_name}</strong></p>`;
-    averageSalary = getAverageUnitSalary(node, node.children.length + 1);
-    averagePerfomanceData = getAverageUnitPerfomance(node);
-    if (
-      warningCriterion.chooseEmployees(node, averageSalary) &&
-      twoWarningCriterion.chooseEmployees(node)
-    ) {
-      li += `<li><strong>${node.name}</strong></li>`;
-    }
-    for (let i = 0, len = node.children.length; i < len; i++) {
-      // eslint-disable-next-line prettier/prettier
-      li += createWarningTreeText(node.getChild(i), averageSalary, averagePerfomanceData);
-    }
-    ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
-  } else {
-    if (
-      warningCriterion.chooseEmployees(node, averageSalary) &&
-      twoWarningCriterion.chooseEmployees(node)
-    ) {
-      li += `<li>${node.name}</li>`;
-    }
-    return li;
-  }
-  iForColors -= 1;
-  return ul || '';
-}
-
-function createWarningTree(container, obj) {
-  if (Object.entries(obj).length === 0 && obj.constructor === Object) {
-    document.getElementsByClassName('Unitroot')[0].innerHTML =
-      'В организации нету подразделений.';
-    return;
-  }
-  container.innerHTML = createWarningTreeText(obj);
 }

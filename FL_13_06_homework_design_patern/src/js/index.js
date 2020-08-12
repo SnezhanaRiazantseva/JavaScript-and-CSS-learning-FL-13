@@ -105,19 +105,14 @@ function run(employeeData) {
     });
   });
 
-  // let sortedNodes = employeeArray.map((employee) => {
-  //   if (employeeArray.children.map((child) => {
-  //     if (child.hasChildren()) {
-  //     }
-  //   }))
-  //   // return employee.children;
-  // });
-
   let root = document.getElementsByClassName('root')[0];
   let unitRoot = document.getElementsByClassName('unitRoot')[0];
   console.log(unitRoot);
   createTree(root, employeeArray[0]);
   createUnitsTree(unitRoot, employeeArray[0]);
+
+  createWarningTree(root, employeeArray[0]);
+  // runStrategy(employeeArray[0]);
 }
 
 function createTree(container, obj) {
@@ -129,20 +124,6 @@ function createTree(container, obj) {
   // container.insertAdjacentHTML('afterend', createTreeText(obj));
   container.innerHTML = createTreeText(obj);
 }
-
-// const colorPalete = [
-//   'pink',
-//   'lightpink',
-//   'hotpink',
-//   'deeppink',
-//   'palevioletred',
-//   'mediumvioletred',
-//   'indianred',
-//   'lightcoral',
-//   'darksalmon',
-//   'salmon',
-//   'rosybrown',
-// ];
 
 const colorPalete = [
   'rgba(255,192,203,.2)',
@@ -209,60 +190,16 @@ function createUnitsTreeText(node) {
     // console.log(node.pool_name);
     li += `<strong>${node.pool_name}</strong>`;
 
-    let averageLowPerfomance = node.children.reduce((acum, employee) => {
-      if (performancePalete[employee.performance] === -1) {
-        acum++;
-      }
-      return acum;
-    }, 0);
-    let averageAveragePerfomance = node.children.reduce((acum, employee) => {
-      if (performancePalete[employee.performance] === 0) {
-        acum++;
-      }
-      return acum;
-    }, 0);
-    let averageHighPerfomance = node.children.reduce((acum, employee) => {
-      if (performancePalete[employee.performance] === 1) {
-        acum++;
-      }
-      return acum;
-    }, 0);
-    if (node.performance === 'average') {
-      averageAveragePerfomance++;
-    } else if (node.performance === 'low') {
-      averageLowPerfomance++;
-    } else {
-      averageHighPerfomance++;
-    }
     let unitAmount = node.children.length + 1;
-    let allPerfomances = [
-      averageAveragePerfomance,
-      averageLowPerfomance,
-      averageHighPerfomance,
-    ];
-    let unitAveragePerfomance;
-    let maxQuantityPerfomance = Math.max.apply(null, allPerfomances);
-    if (maxQuantityPerfomance === allPerfomances[0]) {
-      unitAveragePerfomance = performancePalete[0];
-    } else if (maxQuantityPerfomance === allPerfomances[1]) {
-      unitAveragePerfomance = performancePalete[-1];
-    } else {
-      unitAveragePerfomance = performancePalete[1];
-    }
+    const averagePerfomanceData = getAverageUnitPerfomance(node);
+    const averageUnitSalary = getAverageUnitSalary(node, unitAmount);
 
-    let nodeChildrenSalary = node.children.reduce((amount, employee) => {
-      amount += employee.salary;
-      return amount;
-    }, 0);
-    let allSalary = nodeChildrenSalary + node.salary;
-    let averageUnitSalary = allSalary / unitAmount;
-
-    li += `<p>High perfomance: ${averageHighPerfomance} from ${unitAmount} empoyees.
-    Average perfomance: ${averageAveragePerfomance} from ${unitAmount} empoyees.
-    Low perfomance: ${averageLowPerfomance} from ${unitAmount} unitAmount.
-    Unit average perfomance is <b>${unitAveragePerfomance}</b>.</p>`;
+    li += `<p>High perfomance: ${averagePerfomanceData.averageHighPerfomance} from ${unitAmount} empoyees.
+    Average perfomance: ${averagePerfomanceData.averageAveragePerfomance} from ${unitAmount} empoyees.
+    Low perfomance: ${averagePerfomanceData.averageLowPerfomance} from ${unitAmount} unitAmount.
+    Unit average perfomance is <b>${averagePerfomanceData.unitAveragePerfomance}</b>.</p>`;
     // eslint-disable-next-line prettier/prettier
-    li += `<p>Average unit salary is <b>${averageUnitSalary.toFixed(2)}$</b>.</p></li>`;
+    li += `<p>Average unit salary is <b>${averageUnitSalary}$</b>.</p></li>`;
     for (let i = 0, len = node.children.length; i < len; i++) {
       li += createUnitsTreeText(node.getChild(i));
     }
@@ -271,4 +208,150 @@ function createUnitsTreeText(node) {
     iForColors += 1;
   }
   return ul || '';
+}
+
+function getAverageUnitPerfomance(node) {
+  let averageLowPerfomance = node.children.reduce((acum, employee) => {
+    if (performancePalete[employee.performance] === -1) {
+      acum++;
+    }
+    return acum;
+  }, 0);
+  let averageAveragePerfomance = node.children.reduce((acum, employee) => {
+    if (performancePalete[employee.performance] === 0) {
+      acum++;
+    }
+    return acum;
+  }, 0);
+  let averageHighPerfomance = node.children.reduce((acum, employee) => {
+    if (performancePalete[employee.performance] === 1) {
+      acum++;
+    }
+    return acum;
+  }, 0);
+  if (node.performance === 'average') {
+    averageAveragePerfomance++;
+  } else if (node.performance === 'low') {
+    averageLowPerfomance++;
+  } else {
+    averageHighPerfomance++;
+  }
+  // let unitAmount = node.children.length + 1;
+  let allPerfomances = [
+    averageAveragePerfomance,
+    averageLowPerfomance,
+    averageHighPerfomance,
+  ];
+  let unitAveragePerfomance;
+  let maxQuantityPerfomance = Math.max.apply(null, allPerfomances);
+  if (maxQuantityPerfomance === allPerfomances[0]) {
+    unitAveragePerfomance = performancePalete[0];
+  } else if (maxQuantityPerfomance === allPerfomances[1]) {
+    unitAveragePerfomance = performancePalete[-1];
+  } else {
+    unitAveragePerfomance = performancePalete[1];
+  }
+  const averagePerfomanceData = {
+    // unitAmount,
+    averageHighPerfomance,
+    averageAveragePerfomance,
+    averageLowPerfomance,
+    unitAveragePerfomance,
+  };
+  return averagePerfomanceData;
+}
+
+function getAverageUnitSalary(node, unitAmount) {
+  let nodeChildrenSalary = node.children.reduce((amount, employee) => {
+    amount += employee.salary;
+    return amount;
+  }, 0);
+  let allSalary = nodeChildrenSalary + node.salary;
+  let averageUnitSalary = allSalary / unitAmount;
+  return averageUnitSalary.toFixed(2);
+}
+
+let WarningCriterion = function () {
+  this.criterion = '';
+};
+
+WarningCriterion.prototype = {
+  setStrategy: function (criterion) {
+    this.criterion = criterion;
+  },
+
+  chooseEmployees: function (employee, averageUnitSalary) {
+    return this.criterion.chooseEmployees(employee, averageUnitSalary);
+  },
+};
+
+// let LOW_SALARY = function () {
+//   this.chooseEmployees = this.chooseEmployees = function (
+//     employeeNode,
+//     averageUnitSalary
+//   ) {
+//     return employeeNode.salary < averageUnitSalary;
+//   };
+// };
+
+let HIGH_SALARY = function () {
+  this.chooseEmployees = this.chooseEmployees = function (
+    employeeNode,
+    averageUnitSalary
+  ) {
+    return employeeNode.salary > averageUnitSalary;
+  };
+};
+
+let LOW_PERFOMANCE = function () {
+  this.chooseEmployees = this.chooseEmployees = function (employeeNode) {
+    return employeeNode.performance === 'low';
+  };
+};
+
+let warningCriterion = new WarningCriterion();
+let highSalary = new HIGH_SALARY();
+warningCriterion.setStrategy(highSalary);
+let twoWarningCriterion = new WarningCriterion();
+let lowPerfomance = new LOW_PERFOMANCE();
+twoWarningCriterion.setStrategy(lowPerfomance);
+
+function createWarningTreeText(node, averageSalary, averagePerfomanceData) {
+  let li = '';
+  let ul;
+  if (node.hasChildren()) {
+    li += `<p><strong>${node.pool_name}</strong></p>`;
+    averageSalary = getAverageUnitSalary(node, node.children.length + 1);
+    averagePerfomanceData = getAverageUnitPerfomance(node);
+    if (
+      warningCriterion.chooseEmployees(node, averageSalary) &&
+      twoWarningCriterion.chooseEmployees(node)
+    ) {
+      li += `<li><strong>${node.name}</strong></li>`;
+    }
+    for (let i = 0, len = node.children.length; i < len; i++) {
+      // eslint-disable-next-line prettier/prettier
+      li += createWarningTreeText(node.getChild(i), averageSalary, averagePerfomanceData);
+    }
+    ul = `<ul class="ulItem" style="background-color: ${colorPalete[iForColors]};">${li}</ul>`;
+  } else {
+    if (
+      warningCriterion.chooseEmployees(node, averageSalary) &&
+      twoWarningCriterion.chooseEmployees(node)
+    ) {
+      li += `<li>${node.name}</li>`;
+    }
+    return li;
+  }
+  iForColors -= 1;
+  return ul || '';
+}
+
+function createWarningTree(container, obj) {
+  if (Object.entries(obj).length === 0 && obj.constructor === Object) {
+    document.getElementsByClassName('Unitroot')[0].innerHTML =
+      'В организации нету подразделений.';
+    return;
+  }
+  container.innerHTML = createWarningTreeText(obj);
 }

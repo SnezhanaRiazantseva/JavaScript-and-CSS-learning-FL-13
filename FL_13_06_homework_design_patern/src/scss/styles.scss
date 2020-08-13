@@ -45,7 +45,11 @@ body {
     margin-top: 2em;
 
     .unitItem li {
-      padding: 15px 0;
+      padding: 15px 15px 15px 0;
+    }
+
+    .unitItem p {
+      padding-right: 15px;;
     }
 
     .ulLevelItem {
